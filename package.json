@@ -1,0 +1,23 @@
+{
+  "name": "veecee",
+  "version": "1.0.0",
+  "description": "This is a video conferencing web-app.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RajatBachhawat/veecee.git"
+  },
+  "author": "Rajat Bachhawat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RajatBachhawat/veecee/issues"
+  },
+  "homepage": "https://github.com/RajatBachhawat/veecee#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
