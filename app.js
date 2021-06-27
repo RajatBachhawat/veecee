@@ -6,22 +6,19 @@ const { v4: uuidv4 } = require('uuid')
 
 var port = process.env.PORT || 8080;
 
-app.set('views','');
+app.set('view engine','ejs')
 
 app.use(express.static('./public'));
+app.use(express.static('./public/js'));
 // parses the body of req
 app.use(express.urlencoded({'extended':false}))
-
-app.get("/",function(req,res){
-    res.render(__dirname+'/public/homepage.ejs'); 
-});
 
 app.post("/",function(req,res){
     res.redirect(req.body.url);
 })
 
 app.get('/:room', function(req, res){
-    res.render(__dirname+'/public/meet.ejs', {roomId: req.params.room});
+    res.render('meet', {roomId: req.params.room});
 });
 
 app.listen(port,() => {

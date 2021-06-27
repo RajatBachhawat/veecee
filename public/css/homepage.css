@@ -1,0 +1,81 @@
+#title {
+  background-image: url(../images/wavy-bg.png);
+  background-size:100% 100%;
+}
+.form-control {
+  background-color: #f3f3f3;
+  border: 0px solid #ced4da;
+  border-radius: .5rem;
+}
+.btn {
+  border-radius: .5rem;
+}
+h1 {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 3.5rem;
+  color: #070C4D;
+  padding-top: 5%;
+}
+h5 {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  color: #070C4D;
+}
+#name-generator {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 20%;
+  line-height: 2rem;
+  cursor: pointer;
+  color: #ff2600;
+}
+#name-generator:hover {
+  color: #FD96BA;
+}
+#navbar {
+  font-family: "Archivo", sans-serif;
+}
+.short {
+  padding: 5% 2%;
+}
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #070C4D;
+}
+.nav-item {
+  padding: 0 18px;
+}
+.nav-link {
+  font-weight: 400;
+  font-size: 1rem;
+  color: #070C4D;
+}
+
+#meet {
+  font-family: "Inter", sans-serif;
+}
+.short {
+  padding: 2% 2%;
+}
+.shortText {
+  padding: 3% 2%;
+}
+.create-meet {
+  margin-top: 5%;
+}
+.join-form {
+  padding-top: 5%;
+  margin-right: 3%;
+}
+.join-meet-button {
+  background-color: #ff2600;
+  color: white
+}
+.vc-img {
+  text-align: right;
+}
+.img_videochat{
+  width: 100%;
+}

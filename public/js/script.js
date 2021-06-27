@@ -1,5 +1,5 @@
 /* global $, JitsiMeetJS */
-
+    
 const options = {
     hosts: {
         domain: 'beta.meet.jit.si',
@@ -7,8 +7,6 @@ const options = {
         focus: 'focus.beta.meet.jit.si',
     },
     bosh: 'https://beta.meet.jit.si/http-bind', // FIXME: use xep-0156 for that
-    websocket: 'wss://beta.meet.jit.si/xmpp-websocket', // FIXME: use xep-0156 for that
-    websocketKeepAliveUrl: 'https://beta.meet.jit.si/_unlock',
     // The name of client node advertised in XEP-0115 'c' stanza
     clientNode: 'http://jitsi.org/jitsimeet'
 };
@@ -276,6 +274,7 @@ const initOptions = {
 
 JitsiMeetJS.init(initOptions);
 
+options.bosh += `?room=${ROOM_ID}`;
 connection = new JitsiMeetJS.JitsiConnection(null, null, options);
 
 connection.addEventListener(
