@@ -1,7 +1,3 @@
-#title {
-  background-image: url(../images/wavy-bg.png);
-  background-size:100% 100%;
-}
 .form-control {
   background-color: #f3f3f3;
   border: 0px solid #ced4da;
@@ -9,6 +5,13 @@
 }
 .btn {
   border-radius: .5rem;
+}
+.btn-dark {
+  background-color: #070C4D;
+}
+#title {
+  background-image: url(../images/wavy-bg.png);
+  background-size:100% 100%;
 }
 h1 {
   font-family: "Inter", sans-serif;
@@ -62,16 +65,38 @@ h5 {
 .shortText {
   padding: 3% 2%;
 }
-.create-meet {
-  margin-top: 5%;
+.form-holder {
+  position: relative;
+  height: 22%;
 }
 .join-form {
   padding-top: 5%;
   margin-right: 3%;
+  position: absolute;
+  visibility: hidden;
 }
-.join-meet-button {
+.create-form {
+  padding-top: 5%;
+  margin-right: 3%;
+  position: absolute;
+  visibility: hidden;
+}
+.go-to-room-button {
   background-color: #ff2600;
   color: white
+}
+.button-holder {
+  padding-top: 3%;
+  width: 60%;
+  position: relative;
+}
+.create-room-button {
+  width: 45%;
+  margin-right: 2%;
+}
+.join-room-button {
+  width: 45%;
+  margin-left: 2%;
 }
 .vc-img {
   text-align: right;
