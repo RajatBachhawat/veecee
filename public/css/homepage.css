@@ -65,6 +65,8 @@ h5 {
 .shortText {
   padding: 3% 2%;
 }
+
+
 .form-holder {
   position: relative;
   height: 22%;
@@ -85,6 +87,13 @@ h5 {
   background-color: #ff2600;
   color: white
 }
+.form-text-wrapper {
+  padding-right: 5px;
+}
+.copy-button-wrapper {
+  padding-left: 5px;
+}
+ 
 .button-holder {
   padding-top: 3%;
   width: 60%;
@@ -98,6 +107,8 @@ h5 {
   width: 45%;
   margin-left: 2%;
 }
+
+
 .vc-img {
   text-align: right;
 }

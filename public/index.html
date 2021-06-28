@@ -5,6 +5,8 @@
   <title>veecee</title>
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="css/homepage.css">
   <!-- Google Fonts -->
@@ -15,20 +17,24 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <!-- Animate.css -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <!--UUID-->
   <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/a27b07fa54.js" crossorigin="anonymous"></script>
   <!-- Random Name Generator -->
   <script src="js/nameGenerator.js"></script>
-  <!-- Form Entry/Exit Animations -->
-  <script src="js/formAnimation.js"></script>
-  <!-- Handling Rooms -->
+  <!-- Handling Frontend of Join/Create Room -->
   <script src="js/room.js"></script>
+  <script>
+    function initTooltips() {
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+      })
+    }
+  </script>
 </head>
-<body onload=nameGenerator()>
+<body onload="[nameGenerator(),initTooltips()]">
   <section id="title">
     <div class="container-fluid">
       <section id="navbar">
@@ -68,7 +74,7 @@
                 <!-- Join Form -->
                 <form class="row g-3 join-form" action="/" method="POST" target="_blank">
                   <div class="col-auto">
-                    <input type="text" name="url" class="form-control" id="input-meeting-url" placeholder="Meeting URL">
+                    <input type="text" name="url" class="form-control" id="input-meeting-url" placeholder="Meeting URL / RoomID" style="font-family: monospace;">
                   </div>
                   <div class="col-auto">
                     <input type="submit" class="btn mb-3 go-to-room-button" value="Go">
@@ -76,11 +82,11 @@
                 </form>
                 <!-- Create Form -->
                 <form class="row g-3 create-form" action="/" method="POST" target="_blank">
-                  <div class="col-auto">
-                    <input type="text" name="url" class="form-control" value="" id="create-meeting-url" placeholder="Meeting URL" readonly>
+                  <div class="col-auto form-text-wrapper">
+                    <input type="text" name="url" class="form-control" value="" id="create-meeting-url" placeholder="Meeting URL / RoomID" readonly style="font-family: monospace;">
                   </div>
-                  <div class="col-auto">
-                    <input type="button" class="btn mb-3 copy-button" value="Copy">
+                  <div class="col-auto copy-button-wrapper">
+                    <button type="button" class="btn mb-3 btn-outline-secondary copy-button" onclick="copyURL()" style="font-family: monospace;"><i class="far fa-copy"></i></button>
                   </div>
                   <div class="col-auto">
                     <input type="submit" class="btn mb-3 go-to-room-button" value="Go">
