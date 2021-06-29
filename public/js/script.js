@@ -135,6 +135,16 @@ function onUserLeft(id) {
 }
 function test(track)
 {
+    const participant = track.getParticipantId();
+    let top=remoteTracks[participant].shift();
+    let id;
+    if(top.type=='audio'){
+        id = participant + track.getType() + '1';
+    }
+    else{
+        id = participant + track.getType() + '2';
+    }
+    $(`#${id}`).remove();
     console.log(`track removed!!!${track}`);
 }
 /**
