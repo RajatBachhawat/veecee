@@ -1,0 +1,17 @@
+h1 {
+  background-color: #f55b58;
+  font-family: "Archivo", sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: white;
+  padding: 1% 0%;
+  text-align: center;
+}
+.user-video-holder {
+  margin-top: 3%;
+  text-align: center;
+}
+#user-video {
+  height: 400px;
+  border-radius: 0.8rem;
+}

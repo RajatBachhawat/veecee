@@ -25,8 +25,15 @@ app.post('/:room',(req,res,next)=>{
     next();
 },
 (req,res)=>{
+    console.log(req.params.room)
+    console.log(req.body.name)
+    console.log(req.body.video)
+    console.log(req.body.audio)
     res.render('meet',{
-        roomId: req.params.room});    
+        roomId: req.params.room,
+        displayName: req.body.name,
+        startVideoMuted: req.body.video,
+        startAudioMuted: req.body.audio});    
 })
 
 app.listen(port,()=>{

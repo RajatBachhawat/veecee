@@ -1,5 +1,5 @@
 /* global $, JitsiMeetJS */
-    
+
 const options = {
     hosts: {
         domain: 'beta.meet.jit.si',
@@ -8,7 +8,11 @@ const options = {
     },
     bosh: 'https://beta.meet.jit.si/http-bind', // FIXME: use xep-0156 for that
     // The name of client node advertised in XEP-0115 'c' stanza
-    clientNode: 'http://jitsi.org/jitsimeet'
+    clientNode: 'http://jitsi.org/jitsimeet',
+    // // may remove later
+    // testing: {
+    //     p2pTestMode: true
+    // },
 };
 
 const confOptions = {
@@ -17,6 +21,7 @@ const confOptions = {
 let connection = null;
 let isJoined = false;
 let room = null;
+let num=0;
 
 let localTracks = [];
 const remoteTracks = {};
@@ -43,7 +48,7 @@ function onLocalTracks(tracks) {
                 console.log(
                     `track audio output device was changed to ${deviceId}`));
         if (localTracks[i].getType() === 'video') {
-            $('body').append(`<video autoplay='1' id='localVideo${i}' />`);
+            $('body').append(`<video autoplay='1' style="height:400px;" id='localVideo${i}' />`);
             localTracks[i].attach($(`#localVideo${i}`)[0]);
         } else {
             $('body').append(
@@ -54,18 +59,23 @@ function onLocalTracks(tracks) {
             room.addTrack(localTracks[i]);
         }
     }
+    if(startVideoMuted){
+        inverseMute();
+    }
 }
 
 /**
  * Handles remote tracks
  * @param track JitsiTrack object
  */
+
 function onRemoteTrack(track) {
     if (track.isLocal()) {
         return;
     }
     const participant = track.getParticipantId();
-
+    num+=1;
+    console.log('remote::'+num+participant);
     if (!remoteTracks[participant]) {
         remoteTracks[participant] = [];
     }
@@ -88,12 +98,13 @@ function onRemoteTrack(track) {
 
     if (track.getType() === 'video') {
         $('body').append(
-            `<video autoplay='1' id='${participant}video${idx}' />`);
+            `<video autoplay='1' poster="images/user.png" style="height:400px;" id='${participant}video${idx}' />`);
     } else {
         $('body').append(
             `<audio autoplay='1' id='${participant}audio${idx}' />`);
     }
     track.attach($(`#${id}`)[0]);
+    console.log('yo '+remoteTracks[participant]);
 }
 
 /**
@@ -264,8 +275,7 @@ $(window).bind('unload', unload);
 // JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.ERROR);
 const initOptions = {
     disableAudioLevels: true,
-    requireDisplayName: true
-    
+    requireDisplayName: true,
 };
 
 JitsiMeetJS.init(initOptions);

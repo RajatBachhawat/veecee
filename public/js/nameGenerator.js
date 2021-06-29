@@ -1,5 +1,5 @@
 // stores the names that are returned randomly on clicking span#name-generator
-var people = ["mom","dad","kid","grandpa","grandma","bestie","colleague","dog","aunt"]
+var people = ["mom","dad","kid","grandpa","grandma","bestie","colleague","dog","aunt","teacher","long-lost friend","sibling"]
 function nameGenerator() {
   // get the currently displayed name
   currName = document.getElementById("name-generator").textContent;

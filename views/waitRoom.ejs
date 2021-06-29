@@ -23,25 +23,35 @@
   <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/a27b07fa54.js" crossorigin="anonymous"></script>
-  <script>
-    const roomId = "<%= roomId %>";
-    function setFormAction() {
-      document.querySelector('.join-form').action=window.location.href;
-    }
-  </script>
+  <script src="waitRoom.js" defer></script>
 </head>
-<body onload="setFormAction()">
-  <div class="row">
-    <div class="col lg-6">
-      Your Video
+<body>
+  <!-- Banner -->
+  <h1>veecee</h1>
+  <div class="container-fluid">
+
+    <!-- User's video -->
+    <div class="user-video-holder">
+      <video id="user-video" poster="/images/user.png"></video>
     </div>
 
     <!-- Select audio and video options, and nickname -->
-    
-    <div class="col lg-6">
+    <div class="form-holder">
       <form class="row g-3 join-form" action="Set on load" method="POST">
         <div class="col-auto">
           <input type="text" name="name" class="form-control" id="input-meeting-url" placeholder="Your Display Name" style="font-family: monospace;">
+        </div>
+        <div class="col-auto">
+          <input class="form-check-input" name="video" type="checkbox" value="1" id="flexCheckDefaultAud">
+          <label class="form-check-label" for="flexCheckDefaultAud">
+            Turn off Video
+          </label>
+        </div>
+        <div class="col-auto">
+          <input class="form-check-input" name="audio" type="checkbox" value="1" id="flexCheckDefaultVid">
+          <label class="form-check-label" for="flexCheckDefaultVid">
+            Mute Audio
+          </label>
         </div>
         <div class="col-auto">
           <input type="submit" class="btn mb-3 go-to-room-button" value="Go">
