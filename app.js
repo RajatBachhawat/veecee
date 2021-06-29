@@ -8,19 +8,27 @@ var port = process.env.PORT || 8080;
 
 app.set('view engine','ejs')
 
-app.use(express.static('./public'));
-app.use(express.static('./public/js'));
+app.use(express.static('./public'))
+app.use(express.static('./public/js'))
 // parses the body of req
 app.use(express.urlencoded({'extended':false}))
 
-app.post("/",function(req,res){
+app.post('/',(req,res)=>{
     res.redirect(req.body.url);
 })
 
-app.get('/:room', function(req, res){
-    res.render('meet', {roomId: req.params.room});
-});
+app.get('/:room',(req,res)=>{
+    res.render('waitRoom',{roomId: req.params.room});
+})
 
-app.listen(port,() => {
+app.post('/:room',(req,res,next)=>{
+    next();
+},
+(req,res)=>{
+    res.render('meet',{
+        roomId: req.params.room});    
+})
+
+app.listen(port,()=>{
     console.log(`server is listening on port ${port}`);
-});
+})

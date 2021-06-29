@@ -1,11 +1,11 @@
-let roomURL=null;
+let roomId=null;
 
 // Writes the meeting URL to the read only text field
 function setURL(){
-  document.getElementById('create-meeting-url').value=roomURL;
+  document.getElementById('create-meeting-url').value=roomId;
 }
 
-// Handles entry of the join room form
+// Handles animated entry of the join room form
 function enterJoinForm(){
   let joinForm = document.querySelector('.join-form');
   let createForm = document.querySelector('.create-form');
@@ -19,7 +19,7 @@ function enterJoinForm(){
   joinForm.classList.add('animate__animated', 'animate__fadeInLeft');
 }
 
-// Handles entry of the create room form
+// Handles animated entry of the create room form
 function enterCreateForm(){
   let joinForm = document.querySelector('.join-form');
   let createForm = document.querySelector('.create-form');
@@ -32,24 +32,27 @@ function enterCreateForm(){
   createForm.classList.remove('animate__animated', 'animate__fadeOutRight');
   createForm.classList.add('animate__animated', 'animate__fadeInLeft');
   
-  /* can also just pass uuidv4() */
-  roomURL=window.location.href+uuidv4();
-  
+  /* Assign randomly generated string as roomId */
+  roomId=uuidv4();
+
   setURL();
 }
 
+// Helper for copyURL, updates clipboard with the string passed
+function updateClipboard(newClip) {
+  navigator.clipboard.writeText(newClip).then(function() {
+    /* clipboard successfully set */
+    alert("Copied the text: " + newClip);
+  }, function() {
+    /* clipboard write failed */
+    alert("Could not copy!");
+  });
+}
 // Copies the meeting URL on the text field to the clipboard
 function copyURL() {
   /* Get the text field */
-  let copyText = document.getElementById('create-meeting-url');
-
-  /* Select the text field */
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); /* For mobile devices */
-
-  /* Copy the text inside the text field */
-  document.execCommand("copy");
-
-  /* Alert the copied text */
-  alert("Copied the text: " + copyText.value);
+  let copyString = document.getElementById('create-meeting-url').value;
+  /* Prepend the base url*/ 
+  copyString = `${window.location.href}${copyString}`;
+  updateClipboard(copyString);
 }

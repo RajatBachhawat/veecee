@@ -126,15 +126,11 @@ function test(track)
 {
     console.log(`track removed!!!${track}`);
 }
-function sayHi()
-{
-    console.l
-}
 /**
  * That function is called when connection is established successfully
  */
 function onConnectionSuccess() {
-    room = connection.initJitsiConference('conference', confOptions);
+    room = connection.initJitsiConference(roomId, confOptions);
     room.on(JitsiMeetJS.events.conference.TRACK_ADDED, onRemoteTrack);
     room.on(JitsiMeetJS.events.conference.TRACK_REMOVED, test);
     room.on(
@@ -274,7 +270,7 @@ const initOptions = {
 
 JitsiMeetJS.init(initOptions);
 
-options.bosh += `?room=${ROOM_ID}`;
+options.bosh += `?room=${roomId}`;
 connection = new JitsiMeetJS.JitsiConnection(null, null, options);
 
 connection.addEventListener(
