@@ -7,6 +7,8 @@ const options = {
         focus: 'focus.beta.meet.jit.si',
     },
     bosh: 'https://beta.meet.jit.si/http-bind', // FIXME: use xep-0156 for that
+    websocket: 'wss://beta.meet.jit.si/xmpp-websocket', // FIXME: use xep-0156 for that
+    websocketKeepAliveUrl: 'https://beta.meet.jit.si/_unlock',
     // The name of client node advertised in XEP-0115 'c' stanza
     clientNode: 'http://jitsi.org/jitsimeet',
     // // may remove later
@@ -136,13 +138,15 @@ function onUserLeft(id) {
 function test(track)
 {
     const participant = track.getParticipantId();
-    let top=remoteTracks[participant].shift();
+    const type = track.getType();
+    const idx = remoteTracks[participant].indexOf(track);
+    remoteTracks[participant].splice(idx,1);
     let id;
-    if(top.type=='audio'){
-        id = participant + track.getType() + '1';
+    if(type=='audio'){
+        id = participant + type + '1';
     }
     else{
-        id = participant + track.getType() + '2';
+        id = participant + type + '2';
     }
     $(`#${id}`).remove();
     console.log(`track removed!!!${track}`);
