@@ -1,0 +1,36 @@
+.btn {
+  box-shadow: 0px 12px 22px rgba(0, 0, 0, 0.4);
+}
+.btn:focus {
+  box-shadow: 0px 12px 22px rgba(0, 0, 0, 0.4), 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}
+
+/*Container*/
+#buttons {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0);
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  left: 0;
+  bottom: 0;
+  top: 90%;
+  right: 0;
+}
+
+/*Button toolbar flex*/
+.btn-toolbar {
+  justify-content: center;
+  vertical-align: middle;
+}
+/*Buttons class*/
+.toggle-button {
+  position: relative;
+  font-size: 1.1rem;
+  color: #070C4D;
+  width: 43px;
+  height: 43px;
+  border-radius: 0.8rem;
+  margin-top: 10%;
+}

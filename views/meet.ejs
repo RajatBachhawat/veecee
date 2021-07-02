@@ -4,30 +4,52 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>veecee | Room</title>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://meet.jit.si/libs/lib-jitsi-meet.min.js"></script>
-    <script>
-      const roomId = "<%= roomId %>";
-      let displayName = "<%= displayName %>";
-      let startVideoMuted = "<%= startVideoMuted %>";
-      if(startVideoMuted=="1"){
-        startVideoMuted=true;
-      }
-      else{
-        startVideoMuted=false;
-      }
-      let startAudioMuted = "<%= startAudioMuted %>";
-      if(startAudioMuted=="1"){
-        startAudioMuted=true;
-      }
-      else{
-        startAudioMuted=false;
-      }
-    </script>
-    <script src="script.js" ></script>
+  <title>veecee | Room</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Participant tile styles -->
+  <link rel="stylesheet" href="css/room-styles/camera.css">
+  <!-- Buttons styles -->
+  <link rel="stylesheet" href="css/room-styles/buttons.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Bootstrap Scripts -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <!--UUID-->
+  <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a27b07fa54.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://meet.jit.si/libs/lib-jitsi-meet.min.js"></script>
+  <script>
+    const roomId = "<%= roomId %>";
+    let displayName = "<%= displayName %>";
+    let startVideoMuted = "<%= startVideoMuted %>";
+    if(startVideoMuted=="1"){
+      startVideoMuted=true;
+    }
+    else{
+      startVideoMuted=false;
+    }
+    let startAudioMuted = "<%= startAudioMuted %>";
+    if(startAudioMuted=="1"){
+      startAudioMuted=true;
+    }
+    else{
+      startAudioMuted=false;
+    }
+  </script>
+  <script src="script.js" ></script>
+  <script src="room-control/rearrange.js"></script>
+  <script src="room-control/entry-exit-control.js"></script>
 </head>
-<body>
+<!-- <body>
     <form action = ''><fieldset>
      <label>Type your name: </label>
      <input type = "text"
@@ -37,16 +59,33 @@
        onclick = "changeName()"/>
      </fieldset>
     </form>
-</body>
+</body> -->
 <body>
-    <a href="#" onclick="unload()">Unload</a>
+    <!-- <a href="#" onclick="unload()">Unload</a>
     <a href="#" onclick="switchVideo()">switchVideo</a>
     <a href="#" onclick = "inverseMute()">mute</a>
     <div id="audioOutputSelectWrapper" style="display: none;">
         Change audio output device
         <select id="audioOutputSelect" onchange="changeAudioOutput(this)"></select>
+    </div> -->
+    <!-- Participant Tiles -->
+    <div id="scene">
+      <!-- video/audio elements go here -->
     </div>
-    <!-- <video id="localVideo" autoplay="true"></video> -->
-    <!--<audio id="localAudio" autoplay="true" muted="true"></audio>-->
+
+    <!-- Buttons for controlling meeting -->
+    <div id="buttons">
+      <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+          <button type="button" id="audio-button" class="btn toggle-button" value="0"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="btn-group mr-2" role="group" aria-label="Second group">
+          <button type="button" id="video-button" class="btn toggle-button" value="0"><i class="fas fa-video"></i></button>
+        </div>
+        <div class="btn-group" role="group" aria-label="Third group">
+          <button type="button" id="screenshare-button" class="btn toggle-button" value="0"><i class="fas fa-desktop"></i></button>
+        </div>
+      </div>
+    </div>
 </body>
 </html>

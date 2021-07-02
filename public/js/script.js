@@ -50,10 +50,10 @@ function onLocalTracks(tracks) {
                 console.log(
                     `track audio output device was changed to ${deviceId}`));
         if (localTracks[i].getType() === 'video') {
-            $('body').append(`<video autoplay='1' style="height:400px;" id='localVideo${i}' />`);
+            addCamera(`<video autoplay='1' class="camera" style="height:400px;" id="localVideo${i}"/>`);
             localTracks[i].attach($(`#localVideo${i}`)[0]);
         } else {
-            $('body').append(
+            $('#scene').append(
                 `<audio autoplay='1' muted='false' id='localAudio${i}' />`);
             localTracks[i].attach($(`#localAudio${i}`)[0]);
         }
@@ -99,10 +99,10 @@ function onRemoteTrack(track) {
     const id = participant + track.getType() + idx;
 
     if (track.getType() === 'video') {
-        $('body').append(
-            `<video autoplay='1' poster="images/user.png" style="height:400px;" id='${participant}video${idx}' />`);
+        addCamera(
+            `<video autoplay='1' class="camera" poster="images/user.png" style="height:400px;" id='${participant}video${idx}' />`);
     } else {
-        $('body').append(
+        $('#scene').append(
             `<audio autoplay='1' id='${participant}audio${idx}' />`);
     }
     track.attach($(`#${id}`)[0]);
@@ -133,6 +133,7 @@ function onUserLeft(id) {
 
     for (let i = 0; i < tracks.length; i++) {
         tracks[i].detach($(`#${id}${tracks[i].getType()}`));
+        
     }
 }
 function test(track)
@@ -148,7 +149,8 @@ function test(track)
     else{
         id = participant + type + '2';
     }
-    $(`#${id}`).remove();
+    Camera = document.getElementById(id);
+    removeCamera(Camera);
     console.log(`track removed!!!${track}`);
 }
 /**
