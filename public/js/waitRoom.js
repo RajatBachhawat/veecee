@@ -52,7 +52,7 @@ $('document').ready(()=>{
     }  
   })
 
-  // Toggles state of the audio when video-button clicked
+  // Toggles state of the audio when audio-button clicked
   $('#audio-button').click(()=>{
     $('#toggle-audio').click();
     oldState=Number($('#audio-button').prop('value'));

@@ -48,9 +48,9 @@ function sceneReset() {
 function setWidth(width, margin) {
   let Cameras = document.getElementsByClassName('camera');
   for (var s = 0; s < Cameras.length; s++) {
-      Cameras[s].style.width = width + "px";
-      Cameras[s].style.margin = margin + "px";
-      Cameras[s].style.height = (width * 0.75) + "px";
+    Cameras[s].style.width = width + "px";
+    Cameras[s].style.margin = margin + "px";
+    Cameras[s].style.height = (width * 0.75) + "px";
   }
 }
 

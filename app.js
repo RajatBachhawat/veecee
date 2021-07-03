@@ -25,10 +25,10 @@ app.post('/:room',(req,res,next)=>{
     next();
 },
 (req,res)=>{
-    console.log(req.params.room);
-    console.log(req.body.name);
-    console.log(req.body.video);
-    console.log(req.body.audio);
+    // console.log(req.params.room);
+    // console.log(req.body.name);
+    // console.log(req.body.video);
+    // console.log(req.body.audio);
     res.render('meet',{
         roomId: req.params.room,
         displayName: req.body.name,
