@@ -92,7 +92,22 @@ window.addEventListener("load", function (event) {
   // Leave room when tab killed
   $(window).on('beforeunload', leaveRoom);
   $(window).on('unload', leaveRoom);
-  // Share screen when screen-share button is clicked
-  $('#screenshare-button').click(screenShare);
 
-}, false);
+  // Share screen when screen-share button is clicked
+  $('#screenshare-button').on("click",()=>{
+    try{
+      screenShare()
+    }catch(e){
+      console.log('in catch');
+      console.error(e);
+    }
+    oldState=Number($('#screenshare-button').prop('value'));
+    $('#screenshare-button').prop('value',String(1-oldState));
+    if(oldState==0){
+      $('#screenshare-button').css({'background-color': 'rgb(54, 221, 32)','color':'white'});
+    }
+    else{
+      $('#screenshare-button').css({'background-color':'#efefef','color':'#070C4D'});
+    }
+  });
+});

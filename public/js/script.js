@@ -12,10 +12,6 @@ const options = {
     bridge: 'jitsi-videobridge.jitsi.example.com', // FIXME: use XEP-0030
     // The name of client node advertised in XEP-0115 'c' stanza
     clientNode: 'http://jitsi.org/jitsimeet',
-    // // may remove later
-    // testing: {
-    //     p2pTestMode: true
-    // },
 };
 
 const confOptions = {
@@ -30,7 +26,7 @@ let localTracks = [];
 const remoteTracks = {};
 
 /**
- * Handles local tracks.
+ * Handles local tracks.f
  * @param tracks Array with JitsiTrack objects
  */
 function onLocalTracks(tracks) {
@@ -244,7 +240,7 @@ function screenShare() {
                 width: { min: 768, ideal: 960, max: 1440 },
                 height: { min: 576, ideal: 720, max: 1080 }
             }
-        }, 
+        },
     })
         .then(tracks => {
             localTracks.push(tracks[0]);
@@ -253,11 +249,19 @@ function screenShare() {
                 () => console.log('local track muted'));
             localTracks[1].addEventListener(
                 JitsiMeetJS.events.track.LOCAL_TRACK_STOPPED,
-                () => console.log('local track stoped'));
+                () => console.log('local track stopped'));
             localTracks[1].attach($('#localVideo1')[0]);
             room.addTrack(localTracks[1]);
+            
+            // if localVideo was muted before, then it should be muted after screen-share too
+            if(isVideo && $('#video-button').prop('value')=='1') {
+                toggleVideoMute();
+            }
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+            console.log(error);
+            throw error;
+        });
 }
 
 /**
@@ -335,4 +339,6 @@ function getParticipantById(id){
     console.log(participant);
     return participant;
 }
+
+
 
