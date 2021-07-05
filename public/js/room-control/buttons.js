@@ -96,18 +96,80 @@ window.addEventListener("load", function (event) {
   // Share screen when screen-share button is clicked
   $('#screenshare-button').on("click",()=>{
     try{
-      screenShare()
-    }catch(e){
-      console.log('in catch');
+      screenShare();
+    }
+    catch(e){
       console.error(e);
     }
-    oldState=Number($('#screenshare-button').prop('value'));
-    $('#screenshare-button').prop('value',String(1-oldState));
+  });
+
+  // Show the participants list when participants-button is clicked
+  $('#participants-button').on("click",()=>{
+    oldState=Number($('#participants-button').prop('value'));
+    $('#participants-button').prop('value',String(1-oldState))
     if(oldState==0){
-      $('#screenshare-button').css({'background-color': 'rgb(54, 221, 32)','color':'white'});
+      // Make sure to close chat-window if open
+      $('.chat-window').remove();
+      $('#chat-button').prop('value','0');
+
+      $('#scene').css('right','20%');
+      layoutReset('scene');
+      $('#options').append(`<div class="participants-window"></div>`);
+      $('.participants-window').append(`<h4>Participants</h4>`);
+      $('.participants-window').append(`<h5><i class="fas user-icon fa-user-circle"></i>  ${displayName}</h5>`);
+      participants=room.getParticipants();
+      let participantDisplayNames=[];
+      for (let index = 0; index < participants.length; index++) {
+        const element = participants[index];
+        const displayName = element._displayName;
+        participantDisplayNames.push(displayName);        
+        $('.participants-window').append(`<h5><i class="fas user-icon fa-user-circle"></i>  ${displayName}</h5>`);
+      }
     }
     else{
-      $('#screenshare-button').css({'background-color':'#efefef','color':'#070C4D'});
+      $('#scene').css('right','0');
+      layoutReset('scene');
+      $('.participants-window').remove();
     }
   });
+
+  // Show the chats when chat-button is clicked
+  $('#chat-button').on("click",()=>{
+    oldState=Number($('#chat-button').prop('value'));
+    $('#chat-button').prop('value',String(1-oldState))
+    if(oldState==0){
+      // Make sure to close participant-window if open
+      $('.participants-window').remove();
+      $('#participants-button').prop('value','0');
+
+      $('#scene').css('right','20%');
+      layoutReset('scene');
+      $('#options').append(`<div class="chat-window"></div>`);
+      $('.chat-window').html(
+        `
+        <h4>Chat</h4>
+        <form id="chat-form">
+            <div class="form-group">
+              <button type="button" form="chat-form" class="btn" id="send-message"><i class="fas fa-paper-plane"></i></button>
+              <textarea class="form-control" id="text-message" rows="3" cols="40"></textarea>
+            </div>
+        </form>`
+        );
+      // Send message to other users
+      $('#send-message').on("click",()=>{
+        const message=$('#text-message').val();
+        console.log('this is the message:' + message)
+        if(message!='')
+          room.sendTextMessage(message);
+        $('#text-message').val('');
+        console.log(`sent message ${message}`);
+      })
+    }
+    else{
+      $('#scene').css('right','0');
+      layoutReset('scene');
+      $('.chat-window').remove();
+    }
+  });
+
 });

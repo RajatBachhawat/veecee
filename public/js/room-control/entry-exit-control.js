@@ -3,14 +3,14 @@
 */
 
 // Function to delete Camera
-function removeCamera(Camera) {
+function removeCamera(Container,Camera) {
   Camera.parentNode.removeChild(Camera);
-  sceneReset();
+  layoutReset(Container);
 }
 
 // Function to add Camera
-function addCamera(Camera) {
-  let background = $('#scene');
+function addCamera(Container,Camera) {
+  let background = $(`#${Container}`);
   background.append(Camera);
-  sceneReset();
+  layoutReset(Container);
 }

@@ -18,13 +18,13 @@ function Area(Increment, Count, Width, Height, Margin = 10) {
   else return Increment;
 }
 // Scene:
-function sceneReset() {
+function layoutReset(id) {
 
   // variables:
       let Margin = 5;
-      let Scene = document.getElementById('scene');
-      let Width = Scene.offsetWidth - (Margin * 2);
-      let Height = Scene.offsetHeight - (Margin * 2);
+      let Container = document.getElementById(id);
+      let Width = Container.offsetWidth - (Margin * 2);
+      let Height = Container.offsetHeight - (Margin * 2);
       let Cameras = document.getElementsByClassName('camera');
       let max = 0;
   
@@ -54,8 +54,20 @@ function setWidth(width, margin) {
   }
 }
 
+function switchSpotlight(participantId) {
+  console.log('yolo');
+  console.log(participantId);
+  id = `${participantId}camera`;
+  console.log(id);
+  Camera = document.querySelector(`#${id}`);
+  console.log(Camera);
+  console.log(Camera.querySelectorAll("*"));
+}
+
 // Load and Resize Event
 window.addEventListener("load", function (event) {
-  sceneReset();
-  window.onresize = sceneReset;
+  layoutReset('scene');
+  window.addEventListener("resize",()=>{
+    layoutReset('scene');
+  });
 }, false);

@@ -24,6 +24,7 @@ let num=0;
 
 let localTracks = [];
 const remoteTracks = {};
+const messagesReceived = [];
 
 /**
  * Handles local tracks.f
@@ -49,12 +50,12 @@ function onLocalTracks(tracks) {
         
         if (localTracks[i].getType() === 'video') {
 
-            addCamera(
+            addCamera('scene',
                 `<div class="camera" id="localCamera">\
                     <video autoplay="1" id="localVideo${i}" />\
                 </div>`);
 
-            $('#localCamera').append(`<div class="display-name-holder" id="localName"><h3>${displayName}</h3></div>`);
+            $('#localCamera').append(`<div class="display-name-holder" id="localName"><h3 class="camera-names">${displayName}</h3></div>`);
             localTracks[i].attach($(`#localVideo${i}`)[0]);
         } else {
             $('#scene').append(
@@ -106,14 +107,14 @@ function onRemoteTrack(track) {
     const id = participant + track.getType() + idx;
 
     if (track.getType() === 'video') {
-        addCamera(
+        addCamera('scene',
             `<div class="camera" id="${participant}camera">\
-                <video autoplay="1" poster="images/user.png" id="${participant}video${idx}" />\
+                <video autoplay="1" poster="images/user.png" id="${id}" />\
             </div>`);
-            $(`#${participant}camera`).append(`<div class="display-name-holder" id="${participant}name"><h3>${getParticipantById(participant)._displayName}</h3></div>`)
+            $(`#${participant}camera`).append(`<div class="display-name-holder" id="${participant}name"><h3 class="camera-names">${getParticipantById(participant)._displayName}</h3></div>`)
     } else {
         $('#scene').append(
-            `<audio autoplay='1' id='${participant}audio${idx}' />`);
+            `<audio autoplay='1' id="${id}" />`);
     }
     track.attach($(`#${id}`)[0]);
     console.log('yo '+remoteTracks[participant]);
@@ -147,22 +148,25 @@ function onUserLeft(id) {
 }
 function onTrackRemoved(track)
 {
-    const participant = track.getParticipantId();
+    const participantId = track.getParticipantId();
     const type = track.getType();
-    const idx = remoteTracks[participant].indexOf(track);
-    remoteTracks[participant].splice(idx,1);
+    const idx = remoteTracks[participantId].indexOf(track);
+    remoteTracks[participantId].splice(idx,1);
     let id;
     if(type=='audio'){
-        id = participant + type + '1';
+        id = participantId + type + '1';
         Audio = document.getElementById(id);
         Audio.parentNode.removeChild(Audio)
     }
     else{
-        id = participant + type + '2';
+        id = participantId + type + '2';
         Camera = document.getElementById(id).parentNode;
-        removeCamera(Camera);
+        removeCamera('scene',Camera);
     }
     console.log(`track removed!!!${track}`);
+}
+function onScreenShare(){
+    
 }
 /**
  * That function is called when connection is established successfully
@@ -192,6 +196,31 @@ function onConnectionSuccess() {
     room.on(
         JitsiMeetJS.events.conference.PHONE_NUMBER_CHANGED,
         () => console.log(`${room.getPhoneNumber()} - ${room.getPhonePin()}`));
+    room.on(
+        JitsiMeetJS.events.conference.PARTICIPANT_PROPERTY_CHANGED,
+        (user, propertyKey, oldPropertyValue, propertyValue) => {
+            if(propertyKey=='presenter'){
+                // Switch to spotlight mode if someone is presenting
+                if(propertyValue=='yes'){
+                    if(document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', switchSpotlight(user._id));
+                    } else {
+                        //The DOMContentLoaded event has already fired. Just run the code.
+                        switchSpotlight(user._id);
+                    }
+                }
+                // Switch to scene mode if someone is presenting
+                else if(propertyValue=='no'){
+                    window.onload = switchScene(user._id);
+                }
+            }
+        });
+    room.on(
+        JitsiMeetJS.events.conference.MESSAGE_RECEIVED,
+        (id, text, ts) => {
+            console.log(getParticipantById(id)._displayName+' sent '+text+' at '+ts);
+        }
+    )
     room.join();
 }
 
@@ -226,13 +255,23 @@ function disconnect() {
 }
 
 let isVideo = true;
+let screenSharePermission;
 
 function screenShare() {
+    screenSharePermission = false;
+
+    // if user wants to screen-share but someone else is screen-sharing
+    if(isVideo && isPresenting()){
+        alert('Please wait. You cannot present when someone else is presenting');
+        throw 'Error: Someone else is presenting';
+    }
+
     isVideo = !isVideo;
     if (localTracks[1]) {
         localTracks[1].dispose();
         localTracks.pop();
     }
+
     JitsiMeetJS.createLocalTracks({
         devices: [ isVideo ? 'video' : 'desktop' ],
         constraints: {
@@ -252,15 +291,47 @@ function screenShare() {
                 () => console.log('local track stopped'));
             localTracks[1].attach($('#localVideo1')[0]);
             room.addTrack(localTracks[1]);
+
+            // if control reaches here, user has given screen-share permission
+            if(!isVideo){
+                console.log('hi son');
+                console.log(screenSharePermission)
+                screenSharePermission = true;
+            }
             
-            // if localVideo was muted before, then it should be muted after screen-share too
-            if(isVideo && $('#video-button').prop('value')=='1') {
-                toggleVideoMute();
+            // switch to video
+            if(isVideo){
+                // if localVideo was muted before, then it should be muted after screen-share too
+                if($('#video-button').prop('value')=='1') {
+                    toggleVideoMute();
+                }
+                //remove the local user as presenter
+                room.setLocalParticipantProperty('presenter','no');
+            }
+            // switch to screen-share
+            else{
+                //setting the local user as presenter
+                room.setLocalParticipantProperty('presenter','yes');
+                
+            }
+        })
+        .then(()=>{
+            // Change state of button according to video feed
+            oldState=Number($('#screenshare-button').prop('value'));
+            if(screenSharePermission && oldState==0){
+                $('#screenshare-button').prop('value',String(1-oldState));
+                $('#screenshare-button').css({'background-color': 'rgb(54, 221, 32)','color':'white'});
+            }
+            else{
+                $('#screenshare-button').prop('value',String(1-oldState));
+                $('#screenshare-button').css({'background-color':'#efefef','color':'#070C4D'});
             }
         })
         .catch(error => {
             console.log(error);
-            throw error;
+            // if permission to share screen denied, turn video back on
+            if(!isVideo)
+                screenShare();
         });
 }
 
@@ -334,11 +405,15 @@ if (JitsiMeetJS.mediaDevices.isDeviceChangeAvailable('output')) {
 
 function getParticipantById(id){
     participants=room.getParticipants();
-    console.log(participants);
+    console.log('display participants:'+participants);
     const participant=participants.find(pt=>pt._id===id);
     console.log(participant);
     return participant;
 }
 
-
-
+function isPresenting() {
+    participants=room.getParticipants();
+    console.log('display participants:'+participants)
+    const participant=participants.find(pt=>pt._properties.presenter==='yes');
+    return participant;
+}
