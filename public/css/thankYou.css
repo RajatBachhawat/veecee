@@ -1,0 +1,28 @@
+body {
+  background-image: url(../images/wavy-bg.png);
+  background-size: 100% 100%;
+}
+
+h1,h2 {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 3rem;
+  line-height: 4.3rem;
+  color: #ff2600;
+  padding-top: 5%;
+  padding-left: 10%;
+}
+
+a {
+  font-family: "Archivo", sans-serif;
+  font-weight: 700;
+  font-size: 3rem;
+  color: #070C4D;
+  padding-left: 10%;
+  text-decoration: underline;
+  text-underline-offset: 40%;  
+}
+
+a:hover {
+  color: #091181;
+}

@@ -24,7 +24,7 @@ let num=0;
 
 let localTracks = [];
 const remoteTracks = {};
-const messagesReceived = [];
+let messages = [];
 
 /**
  * Handles local tracks.f
@@ -149,6 +149,12 @@ function onUserLeft(id) {
 function onTrackRemoved(track)
 {
     const participantId = track.getParticipantId();
+
+    // if local user track, then no need to remove
+    if(!participantId){
+        return;
+    }
+    
     const type = track.getType();
     const idx = remoteTracks[participantId].indexOf(track);
     remoteTracks[participantId].splice(idx,1);
@@ -165,8 +171,14 @@ function onTrackRemoved(track)
     }
     console.log(`track removed!!!${track}`);
 }
-function onScreenShare(){
+
+function onScreenShare() {
     
+}
+// Gets called when message received from a participant
+function onMessageReceived(senderDisplayName,text) {
+    messages.push({senderDisplayName,text});
+    refreshMessageBox();
 }
 /**
  * That function is called when connection is established successfully
@@ -218,7 +230,14 @@ function onConnectionSuccess() {
     room.on(
         JitsiMeetJS.events.conference.MESSAGE_RECEIVED,
         (id, text, ts) => {
-            console.log(getParticipantById(id)._displayName+' sent '+text+' at '+ts);
+            console.log('participant who sent: ');
+            let senderDisplayName = 'You';
+            // If message sent by someone else, then...
+            if(getParticipantById(id))
+                senderDisplayName = getParticipantById(id)._displayName;
+            console.log(senderDisplayName+' sent '+text+' at '+ts);
+            onMessageReceived(senderDisplayName,text);
+            console.log('i am here');
         }
     )
     room.join();
@@ -405,15 +424,12 @@ if (JitsiMeetJS.mediaDevices.isDeviceChangeAvailable('output')) {
 
 function getParticipantById(id){
     participants=room.getParticipants();
-    console.log('display participants:'+participants);
     const participant=participants.find(pt=>pt._id===id);
-    console.log(participant);
     return participant;
 }
 
 function isPresenting() {
     participants=room.getParticipants();
-    console.log('display participants:'+participants)
     const participant=participants.find(pt=>pt._properties.presenter==='yes');
     return participant;
 }

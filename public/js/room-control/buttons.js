@@ -38,6 +38,20 @@ function leaveRoom() {
   }
   room.leave();
   connection.disconnect();
+  window.location.href = '/thank-you';
+}
+
+// Refreshes the messages whenever someone sends one
+function refreshMessageBox() {
+  // if chat window is open, then refresh
+  if($('#chat-button').prop('value')=='1'){
+    $('.message').remove();
+    messages.forEach(message => {
+      $('.messages-box').append(`<p class="message"><strong><i class="fas user-icon fa-user-circle"></i>  ${message.senderDisplayName}</strong><br>${message.text}</p>`);
+    });
+    height = $('.chat-window').height();
+    $('.chat-window').animate({scrollTop: height},'slow');
+  }
 }
 
 window.addEventListener("load", function (event) {
@@ -115,7 +129,7 @@ window.addEventListener("load", function (event) {
       $('#scene').css('right','20%');
       layoutReset('scene');
       $('#options').append(`<div class="participants-window"></div>`);
-      $('.participants-window').append(`<h4>Participants</h4>`);
+      $('.participants-window').append(`<div class="window-title"><h4>Participants</h4></div>`);
       $('.participants-window').append(`<h5><i class="fas user-icon fa-user-circle"></i>  ${displayName}</h5>`);
       participants=room.getParticipants();
       let participantDisplayNames=[];
@@ -147,22 +161,28 @@ window.addEventListener("load", function (event) {
       $('#options').append(`<div class="chat-window"></div>`);
       $('.chat-window').html(
         `
-        <h4>Chat</h4>
-        <form id="chat-form">
-            <div class="form-group">
-              <button type="button" form="chat-form" class="btn" id="send-message"><i class="fas fa-paper-plane"></i></button>
-              <textarea class="form-control" id="text-message" rows="3" cols="40"></textarea>
-            </div>
-        </form>`
+        <div class="window-title">
+          <h4>Chat</h4>
+        </div>
+        <div class="messages-box"></div>
+        <div class="chat-form-container">
+          <form id="chat-form">
+              <div class="form-group">
+                <button type="button" form="chat-form" class="btn" id="send-message"><i class="fas fa-paper-plane"></i></button>
+                <textarea class="form-control" id="text-message" rows="3" cols="40"></textarea>
+              </div>
+          </form>
+        </div>`
         );
-      // Send message to other users
+      // Refresh messages as soon as chat-window is opened
+      refreshMessageBox();
+      // Send message to other users on clicking send button
       $('#send-message').on("click",()=>{
         const message=$('#text-message').val();
         console.log('this is the message:' + message)
         if(message!='')
           room.sendTextMessage(message);
         $('#text-message').val('');
-        console.log(`sent message ${message}`);
       })
     }
     else{
@@ -171,5 +191,4 @@ window.addEventListener("load", function (event) {
       $('.chat-window').remove();
     }
   });
-
 });
