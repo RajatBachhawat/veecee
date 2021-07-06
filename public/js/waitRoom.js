@@ -14,12 +14,17 @@ function startStream(videoElem) {
     addVideoStream(myVideo, stream);
   })
 }
-
+let videoStartedOnce = false;``
 // Adds stream to our video element
 function addVideoStream(video, stream) {
   video.srcObject = stream;
   video.addEventListener('loadedmetadata', () => {
     video.play();
+    // Add listeners to the audio/video mute buttons
+    if(!videoStartedOnce){
+      toggleAVMuteButtonsStart();
+      videoStartedOnce = true;
+    }
   })
 }
 
@@ -30,10 +35,7 @@ function stopVideo(videoElem) {
   tracks[1].stop();
 }
 
-$('document').ready(()=>{
-  // Start user-video when DOM ready
-  startStream(myVideo);
-
+function toggleAVMuteButtonsStart() {
   // Toggles state of the video when video-button clicked
   $('#video-button').click(()=>{
     $('#toggle-video').click();
@@ -66,4 +68,9 @@ $('document').ready(()=>{
       $('#audio-button').css({'background-color':'#efefef','color':'#070C4D'});
     }
   })
+}
+
+$('document').ready(()=>{
+  // Start user-video when DOM ready
+  startStream(myVideo);
 })

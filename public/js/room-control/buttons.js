@@ -41,6 +41,40 @@ function leaveRoom() {
   window.location.href = '/thank-you';
 }
 
+function toggleAVMuteButtons() {
+// Toggles state of the video-button when video-button clicked
+  $('#video-button').click(()=>{
+    $('#toggle-video').click();
+    oldState=Number($('#video-button').prop('value'));
+    $('#video-button').prop('value',String(1-oldState))
+    if(oldState==0){
+      $('#video-button').html('<i class="fas fa-video-slash"></i>')
+      $('#video-button').css({'background-color':'#ff2600','color':'white'});
+    }
+    else{
+      $('#video-button').html('<i class="fas fa-video"></i>')
+      $('#video-button').css({'background-color':'#efefef','color':'#070C4D'});
+    }
+    toggleVideoMute()
+  })
+
+  // Toggles state of the audio-button when audio-button clicked
+  $('#audio-button').click(()=>{
+    $('#toggle-audio').click();
+    oldState=Number($('#audio-button').prop('value'));
+    $('#audio-button').prop('value',String(1-oldState));
+    if(oldState==0){
+      $('#audio-button').html('<i class="fas fa-microphone-slash"></i>');
+      $('#audio-button').css({'background-color':'#ff2600','color':'white'});
+    }
+    else{
+      $('#audio-button').html('<i class="fas fa-microphone"></i>')
+      $('#audio-button').css({'background-color':'#efefef','color':'#070C4D'});
+    }
+    toggleAudioMute();
+  })
+}
+
 // Refreshes the messages whenever someone sends one
 function refreshMessageBox() {
   // if chat window is open, then refresh
@@ -69,37 +103,7 @@ window.addEventListener("load", function (event) {
     $('#audio-button').css({'background-color':'#ff2600','color':'white'});
   }
 
-  // Toggles state of the video when video-button clicked
-  $('#video-button').click(()=>{
-    $('#toggle-video').click();
-    oldState=Number($('#video-button').prop('value'));
-    $('#video-button').prop('value',String(1-oldState))
-    if(oldState==0){
-      $('#video-button').html('<i class="fas fa-video-slash"></i>')
-      $('#video-button').css({'background-color':'#ff2600','color':'white'});
-    }
-    else{
-      $('#video-button').html('<i class="fas fa-video"></i>')
-      $('#video-button').css({'background-color':'#efefef','color':'#070C4D'});
-    }
-    toggleVideoMute()
-  })
 
-  // Toggles state of the audio when audio-button clicked
-  $('#audio-button').click(()=>{
-    $('#toggle-audio').click();
-    oldState=Number($('#audio-button').prop('value'));
-    $('#audio-button').prop('value',String(1-oldState));
-    if(oldState==0){
-      $('#audio-button').html('<i class="fas fa-microphone-slash"></i>');
-      $('#audio-button').css({'background-color':'#ff2600','color':'white'});
-    }
-    else{
-      $('#audio-button').html('<i class="fas fa-microphone"></i>')
-      $('#audio-button').css({'background-color':'#efefef','color':'#070C4D'});
-    }
-    toggleAudioMute();
-  })
   
   // Leave room when leave room button clicked
   $('#leaveroom-button').click(leaveRoom); // add a redirect to a end-call page
@@ -169,7 +173,7 @@ window.addEventListener("load", function (event) {
           <form id="chat-form">
               <div class="form-group">
                 <button type="button" form="chat-form" class="btn" id="send-message"><i class="fas fa-paper-plane"></i></button>
-                <textarea class="form-control" id="text-message" rows="3" cols="40"></textarea>
+                <textarea class="form-control" id="text-message" rows="4" cols="40"></textarea>
               </div>
           </form>
         </div>`

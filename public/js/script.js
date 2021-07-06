@@ -66,12 +66,16 @@ function onLocalTracks(tracks) {
             room.addTrack(localTracks[i]);
         }
     }
+    // If user entered with video muted, reflect on button
     if(startVideoMuted){
         toggleVideoMute();
     }
+    // If user entered with audio muted, reflect on button
     if(startAudioMuted){
         toggleAudioMute();
     }
+    // Add onclick listeners to the audio/video mute buttons 
+    toggleAVMuteButtons();
 }
 
 /**
@@ -111,7 +115,7 @@ function onRemoteTrack(track) {
             `<div class="camera" id="${participant}camera">\
                 <video autoplay="1" poster="images/user.png" id="${id}" />\
             </div>`);
-            $(`#${participant}camera`).append(`<div class="display-name-holder" id="${participant}name"><h3 class="camera-names">${getParticipantById(participant)._displayName}</h3></div>`)
+            $(`#${participant}camera`).append(`<div class="display-name-holder" id="${participant}name"><h3 class="camera-names">${getParticipantById(participant).getDisplayName()}</h3></div>`)
     } else {
         $('#scene').append(
             `<audio autoplay='1' id="${id}" />`);
@@ -234,7 +238,7 @@ function onConnectionSuccess() {
             let senderDisplayName = 'You';
             // If message sent by someone else, then...
             if(getParticipantById(id))
-                senderDisplayName = getParticipantById(id)._displayName;
+                senderDisplayName = getParticipantById(id).getDisplayName();
             console.log(senderDisplayName+' sent '+text+' at '+ts);
             onMessageReceived(senderDisplayName,text);
             console.log('i am here');
