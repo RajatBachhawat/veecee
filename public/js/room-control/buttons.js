@@ -38,7 +38,7 @@ function leaveRoom() {
   }
   room.leave();
   connection.disconnect();
-  window.location.href = '/thank-you';
+  window.location.href = '/';
 }
 
 function toggleAVMuteButtons() {
