@@ -18,7 +18,8 @@ const confOptions = {
 };
 
 let connection = null;
-let isJoined = false;
+let hasJoinedConversation = false;
+let hasJoinedRoom = false;
 let room = null;
 let num=0;
 
@@ -62,7 +63,7 @@ function onLocalTracks(tracks) {
                 `<audio autoplay='1' muted='false' id="localAudio${i}" />`);
             localTracks[i].attach($(`#localAudio${i}`)[0]);
         }
-        if (isJoined) {
+        if (hasJoinedConversation) {
             room.addTrack(localTracks[i]);
         }
     }
@@ -87,41 +88,15 @@ function onRemoteTrack(track) {
     if (track.isLocal()) {
         return;
     }
-    const participant = track.getParticipantId();
-    num+=1;
-    console.log('remote::'+num+participant);
-    if (!remoteTracks[participant]) {
-        remoteTracks[participant] = [];
+    const participantId = track.getParticipantId();
+    console.log('remote::'+num+participantId);
+    if (!remoteTracks[participantId]) {
+        remoteTracks[participantId] = [];
     }
-    const idx = remoteTracks[participant].push(track);
-
-    track.addEventListener(
-        JitsiMeetJS.events.track.TRACK_AUDIO_LEVEL_CHANGED,
-        audioLevel => console.log(`Audio Level remote: ${audioLevel}`));
-    track.addEventListener(
-        JitsiMeetJS.events.track.TRACK_MUTE_CHANGED,
-        () => console.log('remote track muted'));
-    track.addEventListener(
-        JitsiMeetJS.events.track.LOCAL_TRACK_STOPPED,
-        () => console.log('remote track stopped'));
-    track.addEventListener(JitsiMeetJS.events.track.TRACK_AUDIO_OUTPUT_CHANGED,
-        deviceId =>
-            console.log(
-                `track audio output device was changed to ${deviceId}`));
-    const id = participant + track.getType() + idx;
-
-    if (track.getType() === 'video') {
-        addCamera('scene',
-            `<div class="camera" id="${participant}camera">\
-                <video autoplay="1" poster="images/user.png" id="${id}" />\
-            </div>`);
-            $(`#${participant}camera`).append(`<div class="display-name-holder" id="${participant}name"><h3 class="camera-names">${getParticipantById(participant).getDisplayName()}</h3></div>`)
-    } else {
-        $('#scene').append(
-            `<audio autoplay='1' id="${id}" />`);
+    const idx = remoteTracks[participantId].push(track);
+    if(hasJoinedRoom) {
+        showRemoteTrack(track,participantId,idx);
     }
-    track.attach($(`#${id}`)[0]);
-    console.log('yo '+remoteTracks[participant]);
 }
 
 /**
@@ -129,7 +104,7 @@ function onRemoteTrack(track) {
  */
 function onConferenceJoined() {
     console.log('conference joined!');
-    isJoined = true;
+    hasJoinedConversation = true;
     for (let i = 0; i < localTracks.length; i++) {
         room.addTrack(localTracks[i]);
     }
@@ -162,17 +137,21 @@ function onTrackRemoved(track)
     const type = track.getType();
     const idx = remoteTracks[participantId].indexOf(track);
     remoteTracks[participantId].splice(idx,1);
-    let id;
-    if(type=='audio'){
-        id = participantId + type + '1';
-        Audio = document.getElementById(id);
-        Audio.parentNode.removeChild(Audio)
+    
+    if(hasJoinedRoom) {
+        let id;
+        if(type=='audio'){
+            id = participantId + type + '1';
+            Audio = document.getElementById(id);
+            Audio.parentNode.removeChild(Audio)
+        }
+        else{
+            id = participantId + type + '2';
+            Camera = document.getElementById(id).parentNode;
+            removeCamera('scene',Camera);
+        }
     }
-    else{
-        id = participantId + type + '2';
-        Camera = document.getElementById(id).parentNode;
-        removeCamera('scene',Camera);
-    }
+
     console.log(`track removed!!!${track}`);
 }
 
@@ -234,14 +213,13 @@ function onConnectionSuccess() {
     room.on(
         JitsiMeetJS.events.conference.MESSAGE_RECEIVED,
         (id, text, ts) => {
-            console.log('participant who sent: ');
-            let senderDisplayName = 'You';
-            // If message sent by someone else, then...
-            if(getParticipantById(id))
-                senderDisplayName = getParticipantById(id).getDisplayName();
-            console.log(senderDisplayName+' sent '+text+' at '+ts);
-            onMessageReceived(senderDisplayName,text);
-            console.log('i am here');
+            let senderDisplayName = text.split(delim,2)[0];
+            let message = text.split(delim,2)[1];
+            // If message sent by this user
+            if(room.myUserId() == id)
+                senderDisplayName = 'You';
+            console.log(senderDisplayName+' sent '+message+' at '+ts);
+            onMessageReceived(senderDisplayName,message);
         }
     )
     room.join();
@@ -393,20 +371,22 @@ JitsiMeetJS.mediaDevices.addEventListener(
 
 connection.connect();
 
-JitsiMeetJS.createLocalTracks(
-    {
-        devices: [ 'audio', 'video' ],
-        constraints: {
-            video: {
-                width: { min: 768, ideal: 960, max: 1440 },
-                height: { min: 576, ideal: 720, max: 1080 }
-            }
-        }, 
-    })
-    .then(onLocalTracks)
-    .catch(error => {
-        throw error;
-    });
+function showLocalTracks() {
+    JitsiMeetJS.createLocalTracks(
+        {
+            devices: [ 'audio', 'video' ],
+            constraints: {
+                video: {
+                    width: { min: 768, ideal: 960, max: 1440 },
+                    height: { min: 576, ideal: 720, max: 1080 }
+                }
+            }, 
+        })
+        .then(onLocalTracks)
+        .catch(error => {
+            throw error;
+        });
+}
 
 if (JitsiMeetJS.mediaDevices.isDeviceChangeAvailable('output')) {
     JitsiMeetJS.mediaDevices.enumerateDevices(devices => {

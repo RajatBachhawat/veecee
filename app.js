@@ -17,10 +17,6 @@ app.post('/',(req,res)=>{
     res.redirect(req.body.url);
 })
 
-app.get('/thank-you',(req,res)=> {
-    res.render('thankYou');
-})
-
 app.get('/:room',(req,res)=>{
     res.render('waitRoom',{roomId: req.params.room});
 })
