@@ -19,7 +19,6 @@ const confOptions = {
 
 let connection = null;
 let hasJoinedConversation = false;
-let hasJoinedRoom = false;
 let room = null;
 let num=0;
 
@@ -67,16 +66,18 @@ function onLocalTracks(tracks) {
             room.addTrack(localTracks[i]);
         }
     }
-    // If user entered with video muted, reflect on button
-    if(startVideoMuted){
-        toggleVideoMute();
+    if(hasJoinedRoom){
+        // If user entered with video muted, reflect on button
+        if(startVideoMuted){
+            toggleVideoMute();
+        }
+        // If user entered with audio muted, reflect on button
+        if(startAudioMuted){
+            toggleAudioMute();
+        }
+        // Add onclick listeners to the audio/video mute buttons 
+        toggleAVMuteButtons();
     }
-    // If user entered with audio muted, reflect on button
-    if(startAudioMuted){
-        toggleAudioMute();
-    }
-    // Add onclick listeners to the audio/video mute buttons 
-    toggleAVMuteButtons();
 }
 
 /**
@@ -371,7 +372,7 @@ JitsiMeetJS.mediaDevices.addEventListener(
 
 connection.connect();
 
-function showLocalTracks() {
+if(hasJoinedRoom) {
     JitsiMeetJS.createLocalTracks(
         {
             devices: [ 'audio', 'video' ],

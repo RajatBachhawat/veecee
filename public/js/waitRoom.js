@@ -1,4 +1,4 @@
-const roomId = "<%= roomId %>";
+console.log(roomId);
 
 document.querySelector('.options-form').action=window.location.href;
 
@@ -71,6 +71,10 @@ function toggleAVMuteButtonsStart() {
 }
 
 $('document').ready(()=>{
+  if(displayName){
+    $('#nickname').prop('value',displayName);
+    $('#nickname').prop('readonly',true);
+  }
   // Start user-video when DOM ready
   startStream(myVideo);
 })

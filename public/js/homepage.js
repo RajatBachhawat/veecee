@@ -53,6 +53,6 @@ function copyURL() {
   /* Get the text field */
   let copyString = document.getElementById('create-meeting-url').value;
   /* Prepend the base url*/ 
-  copyString = `${window.location.href}${copyString}`;
+  copyString = `${window.location.href}type/${copyString}`;
   updateClipboard(copyString);
 }

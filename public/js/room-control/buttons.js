@@ -13,17 +13,6 @@ function changeName()
         // getParticipantById(id)._displayName='dawg';
 }
 
-// Add all saved remote tracks to the DOM
-function showSavedRemoteTracks() {
-    Object.keys(remoteTracks).forEach(participantId => {
-        let idx = 1;
-        remoteTracks[participantId].forEach(track => {
-            showRemoteTrack(track,participantId,idx);
-            idx+=1;
-        });
-    });
-}
-
 // Add remote track to the DOM
 function showRemoteTrack(track,participantId,idx) {
     track.addEventListener(
@@ -148,12 +137,6 @@ window.addEventListener("load", function (event) {
         $('#audio-button').html('<i class="fas fa-microphone-slash"></i>')
         $('#audio-button').css({'background-color':'#ff2600','color':'white'});
     }
-
-    $('#join-button').click(()=>{
-        showLocalTracks();
-        showSavedRemoteTracks();
-        hasJoinedRoom = true;
-    });
     
     // Leave room when leave room button clicked
     $('#leaveroom-button').click(leaveRoom); // add a redirect to a end-call page

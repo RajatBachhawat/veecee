@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>veecee | Joining Options</title>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="../css/joinType.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Bootstrap Scripts -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a27b07fa54.js" crossorigin="anonymous"></script>
+  <script src="../joinType.js" defer></script>
+</head>
+<body>
+  <!-- Banner -->
+  <h1>veecee</h1>
+  <div class="container-fluid row">
+    <h3>Join as Guest User</h3>
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+      <input type="text" id="nickname" name="name" form="join-form" class="form-control" placeholder="Nickname" aria-label="displayName" aria-describedby="basic-addon1" required maxlength="25">
+    </div>
+  </div>
+  <div class="container-fluid row">
+
+    <!-- Join Conversation -->
+  <div class="form-check form-switch">
+    <input class="form-check-input" name="call" type="checkbox" id="call-checkbox" form="join-form" checked value="1">
+    <label class="form-check-label" for="call-checkbox">Call + Chat</label>
+  </div>
+
+  <form id="join-form" action="/" method="POST">
+    <button type="submit" class="btn go-button">Go</button>
+  </form>
+</body>
+</html>
