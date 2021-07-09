@@ -1,4 +1,72 @@
 let roomId=null;
+function redirectToRoom(button,input) {
+  button.addEventListener("click",()=>{
+    const user = auth.currentUser;
+    const roomId = input.value;
+    let url;
+    if(user){
+      if(button.id=='join-url-button')
+        url = `/conversation/${roomId}/${user.displayName}`;
+      else
+        url = `/${roomId}?name=${user.displayName}`;
+      
+      $(`<a href="${url}" target="_blank"></a>`)[0].click();
+      // to avoid pop-up tabs
+      window.location.reload();
+    }
+    else{
+      $('#guest-name-modal').modal('show');
+      const setNameButton = document.querySelector('#guest-name-submit');
+      // Show modal for setting display name, if guest user
+      setNameButton.addEventListener("click",(e)=>{
+        // prevents appending '?' to current url
+        e.preventDefault();
+
+        const displayName = document.querySelector('#guest-name').value;
+        
+        if(button.id=='join-url-button')
+          url = `/conversation/${roomId}/${displayName}`;
+        else
+          url = `/${roomId}?name=${displayName}`;
+
+        $(`<a href="${url}" target="_blank"></a>`)[0].click();
+        // to avoid pop-up tabs
+        window.location.reload();
+      })
+    }
+  })
+}
+
+// Sets up the redirect links of join/create based on user login info
+function setupRedirects(){
+  // listen for go to room
+  const joinRoomInput = document.querySelector('#input-meeting-url');
+  const createRoomInput = document.querySelector('#create-meeting-url');
+  const joinButton = document.querySelector('#join-url-button');
+  const createButton = document.querySelector('#create-url-button');
+  console.log(joinRoomInput);
+  redirectToRoom(joinButton,joinRoomInput);
+  redirectToRoom(createButton,createRoomInput);
+}
+
+const loggedOutLinks = document.querySelectorAll('.logged-out');
+const loggedInLinks = document.querySelectorAll('.logged-in');
+const persistentLinks = document.querySelectorAll('.persistent');
+
+// Sets up the navbar links based on user login info
+function setupNavbar(user){
+  persistentLinks.forEach(item => item.style.display = 'block');
+  if (user) {
+    // toggle user UI elements
+    loggedInLinks.forEach(item => item.style.display = 'block');
+    loggedOutLinks.forEach(item => item.style.display = 'none');
+  }
+  else {
+    // toggle user elements
+    loggedInLinks.forEach(item => item.style.display = 'none');
+    loggedOutLinks.forEach(item => item.style.display = 'block');
+  }
+}
 
 // Writes the meeting URL to the read only text field
 function setURL(){
@@ -42,7 +110,7 @@ function enterCreateForm(){
 function updateClipboard(newClip) {
   navigator.clipboard.writeText(newClip).then(function() {
     /* clipboard successfully set */
-    alert("Copied the text: " + newClip);
+    alert("Copied the invite!\n\n" + newClip);
   }, function() {
     /* clipboard write failed */
     alert("Could not copy!");
@@ -52,7 +120,6 @@ function updateClipboard(newClip) {
 function copyURL() {
   /* Get the text field */
   let copyString = document.getElementById('create-meeting-url').value;
-  /* Prepend the base url*/ 
-  copyString = `${window.location.href}type/${copyString}`;
-  updateClipboard(copyString);
+  const meetingURL = `${window.location.href}${copyString}`;
+  updateClipboard(`Room ID: ${copyString}\nMeeting URL (for guest users):\n${meetingURL}`);
 }

@@ -44,10 +44,10 @@
   font-size: 0.9rem;
   color: white;
   background-color: red;
-  width: 100px;
+  width: 150px;
   height: 43px;
   border-radius: 0.8rem;
-  margin-top: 5%;
+  margin-top: 4%;
 }
 
 #join-button {
@@ -55,10 +55,10 @@
   font-size: 0.9rem;
   color: white;
   background-color: rgb(37, 182, 37);
-  width: 100px;
+  width: 150px;
   height: 43px;
   border-radius: 0.8rem;
-  margin-top: 5%;
+  margin-top: 4%;
 }
 
 img {

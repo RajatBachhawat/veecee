@@ -13,22 +13,18 @@ app.use(express.static('./public/js'))
 // parses the body of req
 app.use(express.urlencoded({'extended':false}))
 
-app.post('/',(req,res)=>{
-    res.redirect(`${req.body.url}`);
-})
+// app.get('/type/:room',(req,res)=>{
+//     res.render('joinType', {roomId: req.params.room});
+// })
 
-app.get('/type/:room',(req,res)=>{
-    res.render('joinType', {roomId: req.params.room});
-})
-
-app.post('/type/:room',(req,res)=>{
-    if(req.body.call!='1'){
-        res.redirect(`/conversation/${req.params.room}/${req.body.name}`);
-    }
-    else{
-        res.redirect(`/${req.params.room}?name=${req.body.name}`);
-    }
-})
+// app.post('/type/:room',(req,res)=>{
+//     if(req.body.call!='1'){
+//         res.redirect(`/conversation/${req.params.room}/${req.body.name}`);
+//     }
+//     else{
+//         res.redirect(`/${req.params.room}?name=${req.body.name}`);
+//     }
+// })
 
 app.get('/conversation/:room/:name',(req,res)=>{
     res.render('conversation',{roomId: req.params.room, displayName: req.params.name});

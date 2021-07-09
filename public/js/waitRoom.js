@@ -14,7 +14,7 @@ function startStream(videoElem) {
     addVideoStream(myVideo, stream);
   })
 }
-let videoStartedOnce = false;``
+let videoStartedOnce = false;
 // Adds stream to our video element
 function addVideoStream(video, stream) {
   video.srcObject = stream;
@@ -71,6 +71,11 @@ function toggleAVMuteButtonsStart() {
 }
 
 $('document').ready(()=>{
+  
+  // Uncheck all checkboxes when loaded
+  $('#toggle-audio').prop('checked',false);
+  $('#toggle-video').prop('checked',false);
+
   if(displayName){
     $('#nickname').prop('value',displayName);
     $('#nickname').prop('readonly',true);

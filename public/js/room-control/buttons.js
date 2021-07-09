@@ -73,7 +73,7 @@ function leaveRoom() {
     }
     room.leave();
     connection.disconnect();
-    window.location.href = '/';
+    window.location.href = `/conversation/${roomId}/${displayName}`;
 }
 
 function toggleAVMuteButtons() {

@@ -2,11 +2,11 @@ const delim = '%|~'; // delimiter between displayName and text in messages
 
 // Leave room
 function leaveRoom() {
-    for (let i = 0; i < localTracks.length; i++) {
-        localTracks[i].dispose();
-    }
-    room.leave();
-    connection.disconnect();
+    // for (let i = 0; i < localTracks.length; i++) {
+    //     localTracks[i].dispose();
+    // }
+    // room.leave();
+    // connection.disconnect();
     window.location.href = '/';
 }
 

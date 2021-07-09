@@ -3,6 +3,9 @@
   border: 0px solid #ced4da;
   border-radius: .5rem;
 }
+.modal {
+  font-family: "Inter";
+}
 .btn {
   border-radius: .5rem;
 }
@@ -117,6 +120,14 @@ h5 {
 }
 .img_videochat{
   width: 100%;
+}
+
+#modal-message {
+  font-size: 0.8rem;
+  color: #070C4D;
+  padding-left: 1%;
+  padding-top: 1%;
+  margin-bottom: 1%;
 }
 
 @media (max-width: 1050px) {
