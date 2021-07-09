@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
   <link rel="manifest" href="icons/site.webmanifest">
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <!-- Animate.css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <!-- Participant tile styles -->
@@ -24,8 +24,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <!-- Bootstrap Scripts -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <!--UUID-->
   <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
   <!-- Font Awesome -->
@@ -58,8 +57,9 @@
   <script src="room-control/rearrange.js"></script>
   <script src="room-control/entry-exit-control.js"></script>
   <script src="room-control/buttons.js"></script>
+  <script src="room-control/themeChange.js"></script>
 </head>
-<body>
+<body class="classic-theme">
     <!-- Highlighted Camera -->
     <div id="spotlight">
 
@@ -72,22 +72,25 @@
     <!-- Buttons for controlling meeting -->
     <div id="buttons">
       <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-        <div class="btn-group mr-2" role="group" aria-label="First group">
+        <div class="btn-group me-2" role="group" aria-label="Zeroth group">
+          <button type="button" id="themechange-button" class="btn toggle-button" value="0" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="fas fa-magic"></i></button>
+        </div>
+        <div class="btn-group me-2" role="group" aria-label="First group">
           <button type="button" id="audio-button" class="btn toggle-button" value="0"><i class="fas fa-microphone"></i></button>
         </div>
-        <div class="btn-group mr-4" role="group" aria-label="Second group">
+        <div class="btn-group me-4" role="group" aria-label="Second group">
           <button type="button" id="video-button" class="btn toggle-button" value="0"><i class="fas fa-video"></i></button>
         </div>
-        <div class="btn-group mr-4" role="group" aria-label="Third group">
+        <div class="btn-group me-4" role="group" aria-label="Third group">
           <button type="button" id="leaveroom-button" class="btn" value="0"><img src="images/end-call.png"></button>
         </div>
-        <div class="btn-group mr-2" role="group" aria-label="Fourth group">
+        <div class="btn-group me-2" role="group" aria-label="Fourth group">
           <button type="button" id="screenshare-button" class="btn toggle-button" value="0"><i class="fas fa-desktop"></i></button>
         </div>
-        <div class="btn-group mr-2" role="group" aria-label="Fifth group">
+        <div class="btn-group me-2" role="group" aria-label="Fifth group">
           <button type="button" id="participants-button" class="btn toggle-button" value="0"><i class="fas fa-user"></i></button>
         </div>
-        <div class="btn-group mr-2" role="group" aria-label="Sixth group">
+        <div class="btn-group me-2" role="group" aria-label="Sixth group">
           <button type="button" id="chat-button" class="btn toggle-button" value="0"><i class="fas fa-comment-alt"></i></button>
         </div>
       </div>
@@ -96,6 +99,30 @@
     <!-- Chat/Participants window -->
     <div id="options">
       
+    </div>
+
+    <!-- Theme change offcanvas -->
+    
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header">
+        <h4 class="offcanvas-title" id="offcanvasExampleLabel">Change Room Theme</h4>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <p>
+          Select a new theme for this room from here. Changes are only made to your view.
+        </p>
+          
+        <div class="list-group" id="theme-container">
+          <btn class="theme list-group-item list-group-item-action active" id="classic" aria-current="true">
+            Classic
+          </btn>
+          <btn class="theme list-group-item list-group-item-action" id="light">Light</btn>
+          <btn class="theme list-group-item list-group-item-action" id="dark">Dark</btn>
+          <btn class="theme list-group-item list-group-item-action" id="funky">Funky</btn>
+          <btn class="theme list-group-item list-group-item-action" id="focus">Focus</btn>
+        </div>
+      </div>
     </div>
 </body>
 </html>

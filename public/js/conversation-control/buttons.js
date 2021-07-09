@@ -22,6 +22,9 @@ function refreshMessageBox() {
 
 window.addEventListener("load", function (event) {
     console.log('loaded!!');
+    // setTimeout(()=>{
+    //     $('#alert-close-button')[0].click();
+    // },7000)
     
     // Leave room when leave room button clicked
     $('#leaveroom-button').click(leaveRoom); // add a redirect to a end-call page
@@ -38,14 +41,14 @@ window.addEventListener("load", function (event) {
             layoutReset('scene');
             $('#options').append(`<div class="participants-window"></div>`);
             $('.participants-window').append(`<div class="window-title"><h4>Participants</h4></div>`);
-            $('.participants-window').append(`<h5><i class="fas user-icon fa-user-circle"></i>    ${displayName} (You)</h5>`);
+            $('.participants-window').append(`<h6><i class="fas user-icon fa-user-circle"></i>    ${displayName} (You)</h6>`);
             participants=room.getParticipants();
             let participantDisplayNames=[];
             for (let index = 0; index < participants.length; index++) {
                 const element = participants[index];
                 const displayName = element._displayName;
                 participantDisplayNames.push(displayName);                
-                $('.participants-window').append(`<h5><i class="fas user-icon fa-user-circle"></i>    ${displayName}</h5>`);
+                $('.participants-window').append(`<h6><i class="fas user-icon fa-user-circle"></i>    ${displayName}</h6>`);
             }
         }
         else{
