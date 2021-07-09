@@ -1,18 +1,5 @@
 const delim = '%|~'; // delimiter between displayName and text in messages
 
-function changeName()
-{
-        //room.getParticipantById(localTracks[1].getParticipantId())._displayName = document.getElementById("txtName").value;
-        //console.log('name changed yay to '+room.getParticipantById(localTracks[1].getParticipantId())._displayName);
-        console.log('henlo');
-        room.setDisplayName('dawg');
-        // id = localTracks[1].getParticipantId();
-        // console.log('id: ' + id);
-        // console.log('parts: ');
-        // console.log(room.getParticipants());
-        // getParticipantById(id)._displayName='dawg';
-}
-
 // Add remote track to the DOM
 function showRemoteTrack(track,participantId,idx) {
     track.addEventListener(
@@ -20,7 +7,10 @@ function showRemoteTrack(track,participantId,idx) {
         audioLevel => console.log(`Audio Level remote: ${audioLevel}`));
     track.addEventListener(
         JitsiMeetJS.events.track.TRACK_MUTE_CHANGED,
-        () => console.log('remote track muted'));
+        (track) => {
+            console.log(track.getParticipantId(),track.getType(),track.isMuted());
+            onTrackMuted(track);
+        })
     track.addEventListener(
         JitsiMeetJS.events.track.LOCAL_TRACK_STOPPED,
         () => console.log('remote track stopped'));
@@ -29,13 +19,20 @@ function showRemoteTrack(track,participantId,idx) {
             console.log(
                 `track audio output device was changed to ${deviceId}`));
     const id = participantId + track.getType() + idx;
-
     if (track.getType() === 'video') {
+        // initialising the mute icon
+        let muteIcon = '<i class="fas fa-microphone remote-mic"></i>';
+        const audioTrack = remoteTracks[participantId][0];
+        if(audioTrack.isMuted()) {
+            muteIcon = '<i class="fas fa-microphone-slash"></i>';
+        }
+
         addCamera('scene',
             `<div class="camera" id="${participantId}camera">\
                 <video autoplay="1" poster="images/user.png" id="${id}" />\
             </div>`);
-        $(`#${participantId}camera`).append(`<div class="display-name-holder" id="${participantId}name"><h3 class="camera-names">${getParticipantById(participantId).getDisplayName()}</h3></div>`)
+        
+            $(`#${participantId}camera`).append(`<div class="display-name-holder" id="${participantId}name"><span class="mute-icon">${muteIcon}</span><span class="camera-names">${getParticipantById(participantId).getDisplayName()}</span></div>`)
     } else {
         $('#scene').append(
             `<audio autoplay='1' id="${id}" />`);
@@ -73,7 +70,7 @@ function leaveRoom() {
     }
     room.leave();
     connection.disconnect();
-    window.location.href = `/conversation/${roomId}/${displayName}`;
+    window.location.href = `/conversation/${roomId}?name=${displayName}`;
 }
 
 function toggleAVMuteButtons() {
@@ -167,7 +164,7 @@ window.addEventListener("load", function (event) {
             layoutReset('scene');
             $('#options').append(`<div class="participants-window"></div>`);
             $('.participants-window').append(`<div class="window-title"><h4>Participants</h4></div>`);
-            $('.participants-window').append(`<h5><i class="fas user-icon fa-user-circle"></i>    ${displayName}</h5>`);
+            $('.participants-window').append(`<h5><i class="fas user-icon fa-user-circle"></i>    ${displayName} (You)</h5>`);
             participants=room.getParticipants();
             let participantDisplayNames=[];
             for (let index = 0; index < participants.length; index++) {

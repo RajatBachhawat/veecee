@@ -5,10 +5,8 @@ function redirectToRoom(button,input) {
     const roomId = input.value;
     let url;
     if(user){
-      if(button.id=='join-url-button')
-        url = `/conversation/${roomId}/${user.displayName}`;
-      else
-        url = `/${roomId}?name=${user.displayName}`;
+      url = `/conversation/${roomId}?name=${user.displayName}`;
+      
       $(`<a href="${url}" target="_blank"></a>`)[0].click();
       // to avoid pop-up tabs
       window.location.reload();
@@ -23,10 +21,7 @@ function redirectToRoom(button,input) {
 
         const displayName = document.querySelector('#guest-name').value;
         
-        if(button.id=='join-url-button')
-          url = `/conversation/${roomId}/${displayName}`;
-        else
-          url = `/${roomId}?name=${displayName}`;
+        url = `/conversation/${roomId}?name=${displayName}`;
 
         $(`<a href="${url}" target="_blank"></a>`)[0].click();
         // to avoid pop-up tabs

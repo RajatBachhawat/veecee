@@ -38,7 +38,7 @@ window.addEventListener("load", function (event) {
             layoutReset('scene');
             $('#options').append(`<div class="participants-window"></div>`);
             $('.participants-window').append(`<div class="window-title"><h4>Participants</h4></div>`);
-            $('.participants-window').append(`<h5><i class="fas user-icon fa-user-circle"></i>    ${displayName}</h5>`);
+            $('.participants-window').append(`<h5><i class="fas user-icon fa-user-circle"></i>    ${displayName} (You)</h5>`);
             participants=room.getParticipants();
             let participantDisplayNames=[];
             for (let index = 0; index < participants.length; index++) {

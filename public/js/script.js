@@ -156,6 +156,39 @@ function onTrackRemoved(track)
     console.log(`track removed!!!${track}`);
 }
 
+function onTrackMuted(track) {
+    const participantId = track.getParticipantId();
+
+    // if local user track, then no need to do anything
+    if(!participantId){
+        return;
+    }
+    
+    const type = track.getType();
+    const idx = remoteTracks[participantId].indexOf(track);
+    if(hasJoinedRoom) {
+        let id;
+        if(type=='audio'){
+            id = participantId + 'name';
+            const displayNameElem = document.getElementById(id).querySelector('.mute-icon');
+            console.log(displayNameElem)
+            if(track.isMuted())
+                displayNameElem.innerHTML='<i class="fas fa-microphone-slash"></i>';
+            else{
+                displayNameElem.innerHTML='<i class="fas fa-microphone remote-mic"></i>';
+            }
+        }
+        else{
+            id = participantId + type + '2';
+            const videoElem = document.getElementById(id);
+            if(track.isMuted())
+                videoElem.style.visibility='hidden';
+            else
+                videoElem.style.visibility='visible';
+        }
+    }
+}
+
 function onScreenShare() {
     
 }
@@ -181,14 +214,14 @@ function onConnectionSuccess() {
         remoteTracks[id] = [];
     });
     room.on(JitsiMeetJS.events.conference.USER_LEFT, onUserLeft);
-    room.on(JitsiMeetJS.events.conference.TRACK_MUTE_CHANGED, 
-        track => console.log(`${track.getType()} - ${track.isMuted()}`));
+    // room.on(JitsiMeetJS.events.conference.TRACK_MUTE_CHANGED, 
+    //     track => console.log(`${track.getType()} - ${track.isMuted()}`));
     room.on(
         JitsiMeetJS.events.conference.DISPLAY_NAME_CHANGED,
         (userID, displayName) => console.log(`changed : ${userID} - ${displayName}`));
-    room.on(
-        JitsiMeetJS.events.conference.TRACK_AUDIO_LEVEL_CHANGED,
-        (userID, audioLevel) => console.log(`${userID} - ${audioLevel}`));
+    // room.on(
+    //     JitsiMeetJS.events.conference.TRACK_AUDIO_LEVEL_CHANGED,
+    //     (userID, audioLevel) => console.log(`${userID} - ${audioLevel}`));
     room.on(
         JitsiMeetJS.events.conference.PHONE_NUMBER_CHANGED,
         () => console.log(`${room.getPhoneNumber()} - ${room.getPhonePin()}`));
