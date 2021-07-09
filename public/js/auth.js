@@ -2,7 +2,7 @@
 auth.onAuthStateChanged(user=>{
     if(user) {
         console.log('user logged in: ',user);
-        setupRedirects();
+        setupRedirects(user);
         setupNavbar(user);
     }
     else{

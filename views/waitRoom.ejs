@@ -25,7 +25,7 @@
   <script src="https://kit.fontawesome.com/a27b07fa54.js" crossorigin="anonymous"></script>
   <script>
     const roomId = "<%= roomId %>";
-    const displayName = "<%= displayName %>";
+    let displayName = "<%= displayName %>";
   </script>
   <script src="waitRoom.js" defer></script>
 </head>
@@ -62,5 +62,34 @@
       </form>
     </div>
   </div>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-firestore.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-analytics.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyCmtpsCC7Arbn54aY0UMlEdVTGBe1XZQC0",
+      authDomain: "veecee-ae647.firebaseapp.com",
+      projectId: "veecee-ae647",
+      //storageBucket: "veecee-ae647.appspot.com",
+      //messagingSenderId: "896480242334",
+      appId: "1:896480242334:web:0f3ac6b0e2d3a763e7298f",
+      measurementId: "G-L95GE4BTF8"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    // make auth and firestore references
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+  </script>
 </body>
 </html>

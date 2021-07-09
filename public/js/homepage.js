@@ -9,7 +9,6 @@ function redirectToRoom(button,input) {
         url = `/conversation/${roomId}/${user.displayName}`;
       else
         url = `/${roomId}?name=${user.displayName}`;
-      
       $(`<a href="${url}" target="_blank"></a>`)[0].click();
       // to avoid pop-up tabs
       window.location.reload();
@@ -44,7 +43,6 @@ function setupRedirects(){
   const createRoomInput = document.querySelector('#create-meeting-url');
   const joinButton = document.querySelector('#join-url-button');
   const createButton = document.querySelector('#create-url-button');
-  console.log(joinRoomInput);
   redirectToRoom(joinButton,joinRoomInput);
   redirectToRoom(createButton,createRoomInput);
 }
@@ -121,5 +119,5 @@ function copyURL() {
   /* Get the text field */
   let copyString = document.getElementById('create-meeting-url').value;
   const meetingURL = `${window.location.href}${copyString}`;
-  updateClipboard(`Room ID: ${copyString}\nMeeting URL (for guest users):\n${meetingURL}`);
+  updateClipboard(`Room ID: ${copyString}\nMeeting URL (paste this link to the browser to join meeting directly):\n${meetingURL}`);
 }

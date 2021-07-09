@@ -3,8 +3,12 @@
   border: 0px solid #ced4da;
   border-radius: .5rem;
 }
-.modal {
+.modal-content {
   font-family: "Inter";
+  border-radius: 0.5rem;
+}
+.modal-title {
+  color: #070C4D;
 }
 .btn {
   border-radius: .5rem;
