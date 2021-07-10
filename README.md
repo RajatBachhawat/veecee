@@ -3,16 +3,45 @@
 ## Table of Contents
 
 1. [Introduction](#introduction)
-2. [Features](#features)
-3. [How To Operate](#how-to-operate)
-5. [Platforms](#platforms)
-4. [Demo Video](#demo)
+2. [How To Operate](#how-to-operate)
+3. [Features](#features)
+4. [Platforms](#platforms)
+5. [Demo Video](#demo)
 
 ## Introduction
 
 **veecee** is a video conferencing web-app, built using the [lib-jitsi-meet](https://github.com/jitsi/lib-jitsi-meet) API. The app is served by a Node + Express server and the frontend is written in vanilla JavaScript, along with HTML, CSS and EJS.
 
 Check out **veecee** @ [https://veecee-video.herokuapp.com](https://veecee-video.herokuapp.com). It's free and it's awesome.
+
+## How To Operate
+
+#### Creating a Room
+
+Go to [veecee](https://veecee-video.herokuapp.com). Choose `Create Room`. Click on the `Copy Invite` button, and then click on `Go` to join the room. Share the copied invite with others.^
+
+#### Joining a Room
+
+Go to [veecee](https://veecee-video.herokuapp.com). Choose `Join Room`. Enter the `Room ID` that you received in your invite, and click on `Go`.^
+
+#### Joining a Meeting directly
+
+Copy the `URL` in the invite and paste it to your browser search bar to join the Meeting directly (and not go the Room first)
+
+#### Inside a Room/Meeting
+
+- **Inside Room**:
+    - Chat with other Room participants.
+    - Join the Meeting.
+    - Exit the Room. 
+
+- **Inside Meeting**:
+    - Video/audio call with other Meeting participants
+    - Chat with other Room participants
+    - Use the other features (like screen sharing, change background)
+    - Exit the Meeting (Takes you to the Room by default)
+
+> ^ If you are a guest user, you will be asked to enter your name (to be displayed in the room).
 
 ## Features
 
@@ -88,13 +117,8 @@ User can choose from a diverse collection of themes, and change the look and moo
 
 We believe this feature makes the whole experience of **veecee** more personalised and sets us apart from other video conferencing apps.
 
-## How To Operate
 
-#### Creating a Room
-
-#### Joining a Room
-
-#### Inside a Room/Meeting
+> *Rooms here means both Rooms and Meetings
 
 ## Platforms
 
