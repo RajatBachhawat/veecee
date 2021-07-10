@@ -61,7 +61,7 @@ function onLocalTracks(tracks) {
                     <video autoplay="1" id="localVideo${i}" />\
                 </div>`);
 
-            $('#localCamera').append(`<div class="display-name-holder" id="localName"><h3 class="camera-names">${displayName}</h3></div>`);
+            $('#localCamera').append(`<div class="display-name-holder" id="localName"><span class="camera-names">${displayName} (You)</span></div>`);
             localTracks[i].attach($(`#localVideo${i}`)[0]);
         } else {
             $('#scene').append(

@@ -29,7 +29,7 @@ function showRemoteTrack(track,participantId,idx) {
 
         addCamera('scene',
             `<div class="camera" id="${participantId}camera">\
-                <video autoplay="1" poster="images/user.png" id="${id}" />\
+                <video autoplay="1" poster="images/user-dark.png" id="${id}" />\
             </div>`);
         
             $(`#${participantId}camera`).append(`<div class="display-name-holder" id="${participantId}name"><span class="mute-icon">${muteIcon}</span><span class="camera-names">${getParticipantById(participantId).getDisplayName()}</span></div>`)
