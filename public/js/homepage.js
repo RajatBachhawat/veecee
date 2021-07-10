@@ -53,6 +53,12 @@ function setupNavbar(user){
     // toggle user UI elements
     loggedInLinks.forEach(item => item.style.display = 'block');
     loggedOutLinks.forEach(item => item.style.display = 'none');
+    
+    // link Account to the user's profile
+    const accountLink = document.querySelector('#account-link');
+    let username = user.displayName;
+    username = username.replace(/ /g, '-');
+    accountLink.href = '/profile';
   }
   else {
     // toggle user elements

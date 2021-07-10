@@ -12,6 +12,11 @@ app.use(express.static('./public'))
 app.use(express.static('./public/js'))
 // parses the body of req
 app.use(express.urlencoded({'extended':false}))
+
+app.get('/profile',(req,res)=>{
+    res.render('profile');
+})
+
 app.get('/conversation/:room',(req,res)=>{
     res.render('conversation',{roomId: req.params.room, displayName: req.query.name});
 })
