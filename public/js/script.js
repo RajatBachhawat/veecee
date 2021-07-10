@@ -12,9 +12,15 @@ const options = {
     bridge: 'jitsi-videobridge.jitsi.example.com', // FIXME: use XEP-0030
     // The name of client node advertised in XEP-0115 'c' stanza
     clientNode: 'http://jitsi.org/jitsimeet',
+    p2p: {
+        enabled: false
+    }
 };
 
 const confOptions = {
+    p2p: {
+        enabled: false
+    }
 };
 
 let connection = null;
@@ -382,6 +388,9 @@ function changeAudioOutput(selected) { // eslint-disable-line no-unused-vars
 const initOptions = {
     disableAudioLevels: true,
     requireDisplayName: true,
+    p2p: {
+        enabled: false
+    }
 };
 
 JitsiMeetJS.init(initOptions);
