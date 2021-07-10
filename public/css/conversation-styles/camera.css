@@ -161,6 +161,10 @@ li {
   padding: 1% 0%;
 }
 
+.message {
+  white-space: pre-wrap;
+}
+
 #send-message {
   border-radius: 0.8rem;
   width: 100%;

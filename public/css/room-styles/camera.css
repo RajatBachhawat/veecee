@@ -178,6 +178,10 @@ p {
   padding: 3% 0%;
 }
 
+.message {
+  white-space: pre-wrap;
+}
+
 #send-message {
   width: 100%;
   margin: auto;
@@ -216,8 +220,16 @@ p {
   background-image: url(../../images/funky-bg@2x.png);
 }
 
-.focus-theme {
-  background-image: url(../../images/focus-bg@2x.png);
+.mild-theme {
+  background-image: url(../../images/mild-bg@2x.png);
+}
+
+.beach-theme {
+  background-image: url(../../images/beach-bg@2x.png);
+}
+
+.party-theme {
+  background-image: url(../../images/party-bg@2x.png);
 }
 
 /* Animation */

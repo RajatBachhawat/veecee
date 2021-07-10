@@ -1,11 +1,3 @@
-const themes = {
-    'classic': 'red-blue-bg@2x.png',
-    'light': 'light-bg@2x.png',
-    'dark': 'dark-bg@2x.png',
-    'funky': 'funky-bg@2x.png',
-    'focus': 'focus-bg@2x.png'
-}
-
 window.addEventListener("load",()=>{
     const themeButtonsContainer = document.querySelector('#theme-container');
     const themeButtons = document.querySelectorAll('.theme');

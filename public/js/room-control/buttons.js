@@ -118,6 +118,10 @@ function refreshMessageBox() {
         height = $('.chat-window').height();
         $('.chat-window').animate({scrollTop: height},'slow');
     }
+    // if not open, display notification
+    else{
+        $('.rounded-circle').removeClass('visually-hidden');
+    }
 }
 
 window.addEventListener("load", function (event) {
@@ -210,6 +214,8 @@ window.addEventListener("load", function (event) {
                 );
             // Refresh messages as soon as chat-window is opened
             refreshMessageBox();
+            // Dismisses badge as soon as chat-window is opened
+            $('.rounded-circle').addClass('visually-hidden');
             // Send message to other users on clicking send button
             $('#send-message').on("click",()=>{
                 const message=$('#text-message').val();

@@ -109,7 +109,7 @@ Guest user can also create and join Rooms* on **veecee**. They just have to go t
 
 ##### 10. Chat Before/After Meeting
 
-User can make use of the Room feature of **veecee**, to drop in **convey a quick message** or **converse** with other participants of the Room, without actually having to be a part of the Meeting. This feature lets a user converse with Meeting participants**before** joining the Meeting and **after** leaving it as well.
+User can make use of the Room feature of **veecee**, to drop in **convey a quick message** or **converse** with other participants of the Room, without actually having to be a part of the Meeting. This feature lets a user converse with Meeting participants **before** joining the Meeting and **after** leaving it as well.
 
 ##### 11. Change Room Theme
 
