@@ -5,12 +5,12 @@
 1. [Introduction](#introduction)
 2. [How To Operate](#how-to-operate)
 3. [Features](#features)
-4. [Platforms](#platforms)
-5. [Demo Video](#demo)
+4. [Tools and Technology used](#tools-and-technology-used)
+5. [Platforms](#platforms)
 
 ## Introduction
 
-**veecee** is a video conferencing web-app, built using the [lib-jitsi-meet](https://github.com/jitsi/lib-jitsi-meet) API. The app is served by a Node + Express server and the frontend is written in vanilla JavaScript, along with HTML, CSS and EJS.
+**veecee** is a video conferencing web-app, built using the [lib-jitsi-meet](https://github.com/jitsi/lib-jitsi-meet) API. It offers basic video/audio calling features along with many more functionalities, a beautiful user interface and a seamless user experience. The app is served by a Node.js + Express server and the frontend is written in vanilla JavaScript, along with HTML, CSS and EJS.
 
 Check out **veecee** @ [https://veecee-video.herokuapp.com](https://veecee-video.herokuapp.com). It's free and it's awesome.
 
@@ -20,13 +20,15 @@ Check out **veecee** @ [https://veecee-video.herokuapp.com](https://veecee-video
 
 Go to [veecee](https://veecee-video.herokuapp.com). Choose `Create Room`. Click on the `Copy Invite` button, and then click on `Go` to join the room. Share the copied invite with others.^
 
+> **veecee** generates a random room ID using [uuid](https://github.com/uuidjs/uuid#uuid--), so that adversaries are unable to brute force your room ID and sabotage your meeting. Only people who you trust with the meeting URL / room ID can join.
+
 #### Joining a Room
 
 Go to [veecee](https://veecee-video.herokuapp.com). Choose `Join Room`. Enter the `Room ID` that you received in your invite, and click on `Go`.^
 
 #### Joining a Meeting directly
 
-Copy the `URL` in the invite and paste it to your browser search bar to join the Meeting directly (and not go the Room first)
+Use the `URL` in the invite to directly open the meeting on your browser and join the Meeting (and not go the Room first). This is offered to give users a **convenient** one-click option to join meetings.
 
 #### Inside a Room/Meeting
 
@@ -76,8 +78,8 @@ Leave the meeting at the press of a button
 
 User can join in the following ways :
 
-- Join the Room - `Join Room` @ **veecee** => paste the Room ID in invite)
-- Join the Meeting directly - paste the URL in invite on your browser search bar
+- **Join the Room** - `Join Room` @ **veecee** => paste the Room ID in invite
+- **Join the Meeting directly** - use the URL in invite to directly reach the meeting
 
 ##### 3. Waiting Room
 
@@ -120,13 +122,22 @@ We believe this feature makes the whole experience of **veecee** more personalis
 
 > *Rooms here means both Rooms and Meetings
 
+## Tools and Technology used
+
+| Purpose                                | Technologies/Tools/Libraries used          |
+| -------------------------------------- | ------------------------------------------ |
+| Markup                                 | HTML5                                      |
+| Styling                                | CSS3, Bootstrap, Animate.css, Google Fonts |
+| Frontend Behaviour                     | JavaScript ES6, jQuery                     |
+| Templating Engine                      | EJS                                        |
+| Server Runtime Environment + Framework | Node.js + Express                          |
+| Video Conferencing API                 | Jitsi API: lib-jitsi-meet                  |
+| User Authentication                    | Firebase                                   |
+| Random Room IDs                        | uuid                                       |
+
 ## Platforms
 
-- **veecee** has been tested thoroughly and works without any issues on the latest version of **Chrome Desktop**.
-- We advise you to use it on **Chrome Desktop** or any other **Chromium-based** browser to get the best results.
-
-- **veecee** should work on other browsers (like Edge, Safari) and other devices (like mobile devices), however the layouts and formatting might get messed.
-
-##  Demo
-
-<link to the demo video>
+- **veecee** has been tested thoroughly and works without any issues on the latest version of **Chrome** on **Windows 10**.
+- We advise you to use it on **Chrome** or any other **Chromium-based** browser to get the best results.
+- We advise you to use it on a **PC** to get the best results.
+- **veecee** should work on other browsers (like Edge, Safari) and other devices (like mobile devices), however the layouts and styling might get skewed.
