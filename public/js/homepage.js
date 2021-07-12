@@ -119,6 +119,6 @@ function updateClipboard(newClip) {
 function copyURL() {
   /* Get the text field */
   let copyString = document.getElementById('create-meeting-url').value;
-  const meetingURL = `${window.location.href}${copyString}`;
+  const meetingURL = `${window.location.origin}/${copyString}`;
   updateClipboard(`Room ID: ${copyString}\nMeeting URL (paste this link to the browser to join meeting directly):\n${meetingURL}`);
 }

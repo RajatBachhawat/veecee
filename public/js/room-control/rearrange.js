@@ -54,16 +54,6 @@ function setWidth(width, margin) {
   }
 }
 
-function switchSpotlight(participantId) {
-  console.log('yolo');
-  console.log(participantId);
-  id = `${participantId}camera`;
-  console.log(id);
-  Camera = document.querySelector(`#${id}`);
-  console.log(Camera);
-  console.log(Camera.querySelectorAll("*"));
-}
-
 // Load and Resize Event
 window.addEventListener("load", function (event) {
   layoutReset('scene');

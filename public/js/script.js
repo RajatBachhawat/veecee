@@ -177,7 +177,6 @@ function onTrackMuted(track) {
         if(type=='audio'){
             id = participantId + 'name';
             const displayNameElem = document.getElementById(id).querySelector('.mute-icon');
-            console.log(displayNameElem)
             if(track.isMuted())
                 displayNameElem.innerHTML='<i class="fas fa-microphone-slash"></i>';
             else{
@@ -234,21 +233,7 @@ function onConnectionSuccess() {
     room.on(
         JitsiMeetJS.events.conference.PARTICIPANT_PROPERTY_CHANGED,
         (user, propertyKey, oldPropertyValue, propertyValue) => {
-            if(propertyKey=='presenter'){
-                // Switch to spotlight mode if someone is presenting
-                if(propertyValue=='yes'){
-                    if(document.readyState === 'loading') {
-                        document.addEventListener('DOMContentLoaded', switchSpotlight(user._id));
-                    } else {
-                        //The DOMContentLoaded event has already fired. Just run the code.
-                        switchSpotlight(user._id);
-                    }
-                }
-                // Switch to scene mode if someone is presenting
-                else if(propertyValue=='no'){
-                    window.onload = switchScene(user._id);
-                }
-            }
+            console.log('participant property changed',getParticipantById(user._id)._properties.presenter);
         });
     room.on(
         JitsiMeetJS.events.conference.MESSAGE_RECEIVED,
@@ -335,8 +320,6 @@ function screenShare() {
 
             // if control reaches here, user has given screen-share permission
             if(!isVideo){
-                console.log('hi son');
-                console.log(screenSharePermission)
                 screenSharePermission = true;
             }
             

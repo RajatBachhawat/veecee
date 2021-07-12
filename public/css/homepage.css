@@ -32,6 +32,9 @@ h5 {
   font-weight: 500;
   color: #070C4D;
 }
+
+/* Name generator */
+
 #name-generator {
   font-weight: 700;
   text-decoration: underline;
@@ -43,6 +46,9 @@ h5 {
 #name-generator:hover {
   color: #FD96BA;
 }
+
+/* Navbar */
+
 #navbar {
   font-family: "Archivo", sans-serif;
 }
@@ -59,6 +65,8 @@ h5 {
   font-size: 1rem;
   color: #070C4D;
 }
+
+/* Title/Intro/Short */
 
 #meet {
   font-family: "Inter", sans-serif;
@@ -93,6 +101,13 @@ h5 {
   background-color: #ff2600;
   color: white
 }
+.go-to-room-button:hover {
+  background-color: white;
+  border: #ff2600;
+  border-style: solid;
+  border-width: thin;
+  color: #ff2600;
+}
 .form-text-wrapper {
   padding-right: 5px;
 }
@@ -118,6 +133,7 @@ h5 {
   margin-left: 2%;
 }
 
+/* Image */
 
 .vc-img {
   text-align: right;
@@ -126,12 +142,56 @@ h5 {
   width: 100%;
 }
 
+/* Modal display name warning*/
+
 #modal-message {
   font-size: 0.8rem;
   color: #070C4D;
   padding-left: 1%;
   padding-top: 1%;
   margin-bottom: 1%;
+}
+
+
+#features {
+  background-color: #fff;
+  font-family: "Inter";
+  padding: 0 7%;
+  padding-top: 10%;
+  text-align: center;
+  position: relative;
+}
+.featureIcon {
+  font-size: 2.5rem;
+  padding-bottom: 4%;
+  color: #ff2600;
+}
+.featureIcon:hover {
+  color: #ff4c68;
+}
+.featureCol {
+  padding: 0 5%;
+  padding-bottom: 6%;
+}
+.featureSubheading {
+  color: #070C4D;
+  font-size: 1rem;
+  font-weight: 500; 
+}
+.featureHeading {
+  color: #070C4D;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.featureText {
+  color: #8f8f8f;
+}
+.githubText {
+  padding-bottom: 3%;
+  text-decoration: underline;
+}
+.githubText:hover {
+  color: #4b4b4b;
 }
 
 @media (max-width: 1050px) {

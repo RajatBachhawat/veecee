@@ -62,5 +62,10 @@ loginForm.addEventListener('submit', (e) => {
         // close the signup modal & reset form
         $('#modal-login-form').modal('hide');
         loginForm.reset();
+    })
+    .catch((error) => {
+        error.message.replace(".", "");
+        alert(error.message + " (" + error.code + ")");
+        document.getElementById("signup-pass").value = "";
     });
 });
