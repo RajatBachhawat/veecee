@@ -10,7 +10,7 @@
 
 ## Introduction
 
-**veecee** is a video conferencing web-app, built using the [lib-jitsi-meet](https://github.com/jitsi/lib-jitsi-meet) API. It offers basic video/audio calling features along with many more functionalities, a beautiful user interface and a seamless user experience. The app is served by a Node.js + Express server and the frontend is written in vanilla JavaScript, along with HTML, CSS and EJS.
+**veecee** is a video conferencing web-app, built using the [lib-jitsi-meet](https://github.com/jitsi/lib-jitsi-meet) API. It offers basic video/audio calling features along with many more functionalities, a beautiful user interface and a seamless user experience. The app is served by a Node.js\ + Express server and the frontend is written in vanilla JavaScript, along with HTML, CSS and EJS.
 
 Check out **veecee** @ [https://veecee-video.herokuapp.com](https://veecee-video.herokuapp.com). It's free and it's awesome.
 
@@ -51,7 +51,7 @@ Use the `URL` in the invite to directly open the meeting on your browser and joi
 
 ##### 1. Video Conference among Multiple Users
 
-Multiple users can join the conference and have a video/audio call (Tested with upto 10 participants)
+Multiple users can join the conference and have a video/audio call (Tested with upto 15 participants, theoretically there is no limit)
 
 ##### 2. Audio Mute/Unmute
 
@@ -124,20 +124,20 @@ We believe this feature makes the whole experience of **veecee** more personalis
 
 ## Tools and Technology used
 
-| Purpose                                | Technologies/Tools/Libraries used          |
-| -------------------------------------- | ------------------------------------------ |
-| Markup                                 | HTML5                                      |
-| Styling                                | CSS3, Bootstrap, Animate.css, Google Fonts |
-| Frontend Behaviour                     | JavaScript ES6, jQuery                     |
-| Templating Engine                      | EJS                                        |
-| Server Runtime Environment + Framework | Node.js + Express                          |
-| Video Conferencing API                 | Jitsi API: lib-jitsi-meet                  |
-| User Authentication                    | Firebase                                   |
-| Random Room IDs                        | uuid                                       |
+| Purpose                                | Technologies/Tools/Libraries used                            |
+| -------------------------------------- | ------------------------------------------------------------ |
+| Markup                                 | HTML5                                                        |
+| Styling                                | CSS3, Bootstrap, Animate.css, Google Fonts                   |
+| Frontend Behaviour                     | JavaScript ES6, jQuery                                       |
+| Templating Engine                      | EJS                                                          |
+| Server Runtime Environment + Framework | Node.js + Express                                            |
+| Video Conferencing API                 | Jitsi API: [lib-jitsi-meet](https://github.com/jitsi/lib-jitsi-meet) |
+| User Authentication                    | Firebase                                                     |
+| Random Room IDs                        | [uuid](https://github.com/uuidjs/uuid#uuid--)                |
 
 ## Platforms
 
-- **veecee** has been tested thoroughly and works without any issues on the latest version of **Chrome** on **Windows 10**.
+- **veecee** has been tested thoroughly and works without issues on the latest version of **Chrome** on **Windows 10**.
 - We advise you to use it on **Chrome** or any other **Chromium-based** browser to get the best results.
 - We advise you to use it on a **PC** to get the best results.
 - **veecee** should work on other browsers (like Edge, Safari) and other devices (like mobile devices), however the layouts and styling might get skewed.
