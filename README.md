@@ -10,9 +10,14 @@
 
 ## Introduction
 
-**veecee** is a video conferencing web-app, built using the [lib-jitsi-meet](https://github.com/jitsi/lib-jitsi-meet) API. It offers basic video/audio calling features along with many more functionalities, a beautiful user interface and a seamless user experience. The app is served by a Node.js\ + Express server and the frontend is written in vanilla JavaScript, along with HTML, CSS and EJS.
+**veecee** is a video conferencing web-app, built using the [lib-jitsi-meet](https://github.com/jitsi/lib-jitsi-meet) API. It offers basic video/audio calling features along with many more functionalities, a beautiful user interface and a seamless user experience. The app is served by a Node.js + Express server and the frontend is written in vanilla JavaScript, along with HTML, CSS and EJS.
 
 Check out **veecee** @ [https://veecee-video.herokuapp.com](https://veecee-video.herokuapp.com). It's free and it's awesome.
+
+Here's a look at a veecee meeting:
+
+<a href="https://ibb.co/crxcjgh"><img src="https://i.ibb.co/d570RW4/example-meet.png" alt="example-meet" border="0" style="height: 300px"></a>
+
 
 ## How To Operate
 
@@ -51,7 +56,7 @@ Use the `URL` in the invite to directly open the meeting on your browser and joi
 
 ##### 1. Video Conference among Multiple Users
 
-Multiple users can join the conference and have a video/audio call (Tested with upto 15 participants, theoretically there is no limit)
+Multiple users can join the conference and have a video/audio call (Tested with upto 10 participants, theoretically there is no limit)
 
 ##### 2. Audio Mute/Unmute
 
@@ -117,13 +122,15 @@ Guest user can also create and join Rooms* on **veecee**. They just have to go t
 
 User can make use of the Room feature of **veecee**, to drop in **convey a quick message** or **converse** with other participants of the Room, without actually having to be a part of the Meeting. This feature lets a user converse with Meeting participants **before** joining the Meeting and **after** leaving it as well.
 
-##### 12. Change Room Theme :sparkles:
+##### 12. Change Meeting Theme :sparkles:
 
-User can choose from a diverse collection of themes, and change the look and mood of their view of the Room accordingly.
+User can choose from a diverse collection of themes, and change the look and mood of their view of the Meeting accordingly.
+
+Here's a glimpse of the various themes on offer:
+
+<a href="https://ibb.co/ykCJ97B"><img src="https://i.ibb.co/c89dBVX/all-themes-3-big.png" alt="all-themes-3-big" border="0" style="height: 300px;"></a>
 
 We believe this feature makes the whole experience of **veecee** more personalised and sets us apart from other video conferencing apps.
-
-> *Rooms here means both Rooms and Meetings
 
 ##### 13. UI/UX Enhancements :sparkles:
 
@@ -131,6 +138,9 @@ We believe this feature makes the whole experience of **veecee** more personalis
 2. **Audio Mute/Unmute state of Participants**: A mic icon beside the display name of participants tells the state of their audio
 3. **Chat Notification Badge**: A blue notification badge appears when you have unread chats
 4. **Non-Invasive Chat Window**: The chat (and participants) window, when opened doesn't hide the participants' camera tiles, instead the tiles resize to enable you to chat and see the participants at the same time
+
+
+> *Rooms here means both Rooms and Meetings
 
 ## Tools and Technology used
 
