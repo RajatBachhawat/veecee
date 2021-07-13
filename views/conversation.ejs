@@ -68,6 +68,9 @@
   <!-- Buttons for controlling conversation -->
   <div id="buttons">
     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+      <div class="btn-group me-4" role="group" aria-label="Sub-Zeroth group">
+        <button type="button" id="invite-button" class="btn toggle-button" value="0"><i class="far fa-envelope"></i></button>
+      </div>
       <div class="btn-group me-4" role="group" aria-label="Third group">
         <button type="button" id="leaveroom-button" class="btn" value="0">Exit Room</button>
       </div>
@@ -76,6 +79,10 @@
       </div>
       <div class="btn-group me-2" role="group" aria-label="Seventh group">
         <button type="button" id="join-button" class="btn toggle-button" value="0">Join Meeting</button>
+      </div>
+      <!-- Dummy button -->
+      <div class="btn-group me-2" role="group" aria-label="Sub-Zeroth group">
+        <button type="button" id="dummy-button" class="btn toggle-button" value="0" style="visibility: hidden;"></button>
       </div>
     </div>
   </div>

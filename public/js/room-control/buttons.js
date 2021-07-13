@@ -124,6 +124,17 @@ function refreshMessageBox() {
     }
 }
 
+// Updates clipboard with the string passed
+function updateClipboard(newClip) {
+    navigator.clipboard.writeText(newClip).then(function() {
+      /* clipboard successfully set */
+      alert("Copied the invite!\n\n" + newClip);
+    }, function() {
+      /* clipboard write failed */
+      alert("Could not copy!");
+    });
+}
+
 window.addEventListener("load", function (event) {
     console.log('loaded!!');
     // If video is muted at the start, show the correct icon
@@ -231,4 +242,10 @@ window.addEventListener("load", function (event) {
             $('.chat-window').remove();
         }
     });
+    
+    // Copy invite on clicking invite button
+    $('#invite-button').on('click',()=>{
+        const meetingURL = `${window.location.origin}/${roomId}`;
+        updateClipboard(`Room ID: ${roomId}\nMeeting URL (paste this link to the browser to join meeting directly):\n${meetingURL}`);
+    })
 });

@@ -97,30 +97,40 @@ User can view the list of participants in the Room at the press of a button.
 
 User can chat with all the participants of the Room through a chat window.
 
-##### 7. Login/Signup
+##### 7. Invite from Meeting
+
+User can Invite other participants by using the Copy Invite button in the Room*
+
+##### 8. Login/Signup
 
 User can sign up to **veecee**, creating their account with us. They can login or logout whenever they like.
 
-##### 8. User Profile
+##### 9. User Profile
 
 User can view their profile, and change their Name (which is used by default as their name in Rooms*)
 
-##### 9. Use As Guest
+##### 10. Use As Guest
 
 Guest user can also create and join Rooms* on **veecee**. They just have to go through an extra step of setting their nickname before entering.
 
-##### 10. Chat Before/After Meeting
+##### 11. Chat Before/After Meeting
 
 User can make use of the Room feature of **veecee**, to drop in **convey a quick message** or **converse** with other participants of the Room, without actually having to be a part of the Meeting. This feature lets a user converse with Meeting participants **before** joining the Meeting and **after** leaving it as well.
 
-##### 11. Change Room Theme
+##### 12. Change Room Theme :sparkles:
 
 User can choose from a diverse collection of themes, and change the look and mood of their view of the Room accordingly.
 
 We believe this feature makes the whole experience of **veecee** more personalised and sets us apart from other video conferencing apps.
 
-
 > *Rooms here means both Rooms and Meetings
+
+##### 13. UI/UX Enhancements :sparkles:
+
+1. **Dynamic Camera Tile Resizing**: Camera tiles resize and rearrange dynamically based on number of participants
+2. **Audio Mute/Unmute state of Participants**: A mic icon beside the display name of participants tells the state of their audio
+3. **Chat Notification Badge**: A blue notification badge appears when you have unread chats
+4. **Non-Invasive Chat Window**: The chat (and participants) window, when opened doesn't hide the participants' camera tiles, instead the tiles resize to enable you to chat and see the participants at the same time
 
 ## Tools and Technology used
 

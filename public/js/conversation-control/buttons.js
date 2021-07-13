@@ -20,6 +20,17 @@ function refreshMessageBox() {
     $('.chat-window').animate({scrollTop: height},'slow');
 }
 
+// Updates clipboard with the string passed
+function updateClipboard(newClip) {
+    navigator.clipboard.writeText(newClip).then(function() {
+      /* clipboard successfully set */
+      alert("Copied the invite!\n\n" + newClip);
+    }, function() {
+      /* clipboard write failed */
+      alert("Could not copy!");
+    });
+}
+
 window.addEventListener("load", function (event) {
     console.log('loaded!!');
     // setTimeout(()=>{
@@ -71,5 +82,11 @@ window.addEventListener("load", function (event) {
 
     $('#join-button').on("click",()=>{
         window.location.href=`/${roomId}?name=${displayName}`;
+    })
+
+    // Copy invite on clicking invite button
+    $('#invite-button').on('click',()=>{
+        const meetingURL = `${window.location.origin}/${roomId}`;
+        updateClipboard(`Room ID: ${roomId}\nMeeting URL (paste this link to the browser to join meeting directly):\n${meetingURL}`);
     })
 });
