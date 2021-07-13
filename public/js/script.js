@@ -302,8 +302,8 @@ function screenShare() {
         devices: [ isVideo ? 'video' : 'desktop' ],
         constraints: {
             video: {
-                width: { min: 768, ideal: 960, max: 1440 },
-                height: { min: 576, ideal: 720, max: 1080 }
+                width: { min: 320, ideal: 960, max: 1440 },
+                height: { min: 240, ideal: 720, max: 1080 }
             }
         },
     })
@@ -403,8 +403,8 @@ if(hasJoinedRoom) {
             devices: [ 'audio', 'video' ],
             constraints: {
                 video: {
-                    width: { min: 768, ideal: 960, max: 1440 },
-                    height: { min: 576, ideal: 720, max: 1080 }
+                    width: { min: 320, ideal: 960, max: 1440 },
+                    height: { min: 240, ideal: 720, max: 1080 }
                 }
             }, 
         })
